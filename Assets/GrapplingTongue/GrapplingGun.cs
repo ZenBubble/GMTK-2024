@@ -1,50 +1,54 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BasePrefabs;
 
+/// <summary>
+/// Grabs onto defined layers or all surfaces. Can lasso enemies with both spring joints and rb2Ds. 
+/// </summary>
 public class GrapplingGun : MonoBehaviour
 {
-    [Header("Scripts Ref:")]
-    public GrapplingTongue grappleRope;
+    [Header("Scripts Ref:")] public GrapplingTongue grappleRope;
 
-    [Header("Layers Settings:")]    
-    [SerializeField] private bool grappleToAll = false;
+    [Header("Layers Settings:")] [SerializeField]
+    private bool grappleToAll = false;
+
     [SerializeField] private int grappableLayerNumber = 9;
 
-    [Header("Main Camera:")]
-    public Camera m_camera;
+    [Header("Main Camera:")] public Camera m_camera;
 
-    [Header("Transform Ref:")]
-    public Transform gunHolder;
+    [Header("Transform Ref:")] public Transform gunHolder;
     public Transform gunPivot;
     public Transform firePoint;
 
-    [Header("Physics Ref:")]
-    public SpringJoint2D m_springJoint2D;
+    [Header("Physics Ref:")] public SpringJoint2D m_springJoint2D;
     public Rigidbody2D m_rigidbody;
 
-    [Header("Rotation:")]
-    [SerializeField] private bool rotateOverTime = true;
+    [Header("Rotation:")] [SerializeField] private bool rotateOverTime = true;
     [Range(0, 60)] [SerializeField] private float rotationSpeed = 4;
 
-    [Header("Distance:")]
-    [SerializeField] private bool hasMaxDistance = false;
+    [Header("Distance:")] [SerializeField] private bool hasMaxDistance = false;
     [SerializeField] private float maxDistnace = 20;
-    
+
+
+    private GameObject connectedObject;
+
     private enum LaunchType
     {
         Transform_Launch,
         Physics_Launch
     }
 
-    [Header("Launching:")]
-    [SerializeField] private bool launchToPoint = true;
+    [Header("Launching:")] [SerializeField]
+    private bool launchToPoint = true;
+
     [SerializeField] private LaunchType launchType = LaunchType.Physics_Launch;
     [SerializeField] private float launchSpeed = 1;
 
-    [Header("No Launch To Point")]
-    [SerializeField] private bool autoConfigureDistance = false;
+    [Header("No Launch To Point")] [SerializeField]
+    private bool autoConfigureDistance = false;
+
     [SerializeField] private float targetDistance = 3;
     [SerializeField] private float targetFrequncy = 1;
 
@@ -55,7 +59,7 @@ public class GrapplingGun : MonoBehaviour
     {
         grappleRope.enabled = false;
         m_springJoint2D.enabled = false;
-
+        connectedObject = null;
     }
 
     private void Update()
@@ -68,6 +72,10 @@ public class GrapplingGun : MonoBehaviour
         {
             if (grappleRope.enabled)
             {
+                if (connectedObject)
+                {
+                    grapplePoint = connectedObject.transform.position;
+                }
                 RotateGun(grapplePoint, false);
             }
             else
@@ -88,6 +96,12 @@ public class GrapplingGun : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
+            if (connectedObject)
+            {
+                connectedObject.GetComponent<SpringJoint2D>().enabled = false;
+            }
+
+            connectedObject = null;
             grappleRope.enabled = false;
             m_springJoint2D.enabled = false;
             m_rigidbody.gravityScale = 1;
@@ -106,7 +120,8 @@ public class GrapplingGun : MonoBehaviour
         float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
         if (rotateOverTime && allowRotationOverTime)
         {
-            gunPivot.rotation = Quaternion.Lerp(gunPivot.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * rotationSpeed);
+            gunPivot.rotation = Quaternion.Lerp(gunPivot.rotation, Quaternion.AngleAxis(angle, Vector3.forward),
+                Time.deltaTime * rotationSpeed);
         }
         else
         {
@@ -124,6 +139,12 @@ public class GrapplingGun : MonoBehaviour
             {
                 if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
                 {
+                    if (_hit.transform.gameObject.HasComponent<SpringJoint2D>() 
+                        && _hit.transform.gameObject.HasComponent<Rigidbody2D>())
+                    {
+                        connectedObject = _hit.transform.gameObject;
+                    }
+
                     grapplePoint = _hit.point;
                     grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                     grappleRope.enabled = true;
@@ -140,6 +161,7 @@ public class GrapplingGun : MonoBehaviour
             m_springJoint2D.distance = targetDistance;
             m_springJoint2D.frequency = targetFrequncy;
         }
+
         if (!launchToPoint)
         {
             if (autoConfigureDistance)
@@ -158,9 +180,19 @@ public class GrapplingGun : MonoBehaviour
                 case LaunchType.Physics_Launch:
                     m_springJoint2D.connectedAnchor = grapplePoint;
                     Vector2 distanceVector = firePoint.position - gunHolder.position;
+                    if (connectedObject)
+                    {
+                        SpringJoint2D otherSpring = connectedObject.GetComponent<SpringJoint2D>();
+                        Rigidbody2D otherRb = connectedObject.GetComponent<Rigidbody2D>();
+                        
+                        otherSpring.connectedAnchor = gunHolder.transform.position;
+                        otherSpring.distance = distanceVector.magnitude;
+                        otherSpring.frequency = launchSpeed / otherRb.mass;
+                        otherSpring.enabled = true;
+                    }
 
                     m_springJoint2D.distance = distanceVector.magnitude;
-                    m_springJoint2D.frequency = launchSpeed;
+                    m_springJoint2D.frequency = launchSpeed / m_rigidbody.mass;
                     m_springJoint2D.enabled = true;
                     break;
                 case LaunchType.Transform_Launch:
