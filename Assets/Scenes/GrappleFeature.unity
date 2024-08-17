@@ -723,7 +723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6829283463612913817, guid: d5aad96e63710d0458d035e200582e51, type: 3}
       propertyPath: m_Mass
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6882313305862734338, guid: d5aad96e63710d0458d035e200582e51, type: 3}
       propertyPath: m_Distance
@@ -739,7 +739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6882313305862734338, guid: d5aad96e63710d0458d035e200582e51, type: 3}
       propertyPath: m_AutoConfigureConnectedAnchor
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7684847305115246743, guid: d5aad96e63710d0458d035e200582e51, type: 3}
       propertyPath: m_camera
