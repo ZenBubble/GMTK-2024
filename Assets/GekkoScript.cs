@@ -42,6 +42,7 @@ public class GekkoScript : MonoBehaviour
         }
     }
 
+    // jumps if the player is grounded
     public void jump()
     {
         if (isGrounded())
