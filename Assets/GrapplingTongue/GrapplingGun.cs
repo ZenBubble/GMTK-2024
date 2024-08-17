@@ -119,6 +119,10 @@ public class GrapplingGun : MonoBehaviour
         Vector3 distanceVector = lookPoint - gunPivot.position;
 
         float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
+        if (Math.Sign(gunHolder.localScale.x) == -1)
+        {
+            angle += 180;
+        }
         if (rotateOverTime && allowRotationOverTime)
         {
             gunPivot.rotation = Quaternion.Lerp(gunPivot.rotation, Quaternion.AngleAxis(angle, Vector3.forward),
