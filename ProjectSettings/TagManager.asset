@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -11,9 +12,9 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Selection Handles
+  - Selection Box
+  - Ground
   - 
   - 
   - 
@@ -40,4 +41,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 3321585961
+    locked: 0
+  - name: Select
+    uniqueID: 3243194659
     locked: 0
