@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using BasePrefabs;
 
 public class GrapplingGun : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class GrapplingGun : MonoBehaviour
     [Header("Distance:")]
     [SerializeField] private bool hasMaxDistance = false;
     [SerializeField] private float maxDistnace = 20;
-
+    
     private enum LaunchType
     {
         Transform_Launch,
@@ -156,7 +157,6 @@ public class GrapplingGun : MonoBehaviour
             {
                 case LaunchType.Physics_Launch:
                     m_springJoint2D.connectedAnchor = grapplePoint;
-
                     Vector2 distanceVector = firePoint.position - gunHolder.position;
 
                     m_springJoint2D.distance = distanceVector.magnitude;
