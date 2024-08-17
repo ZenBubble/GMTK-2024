@@ -60,7 +60,6 @@ public class GameManager : MonoBehaviour
     ///     Update game states and triggers the game state changed action.
     /// </summary>
     public void UpdateGameState(GameState newState) {
-        State = newState;
         switch (newState) {
             // all kinds of logic
             case GameState.OnGame:
@@ -78,6 +77,7 @@ public class GameManager : MonoBehaviour
             default:
                 throw new ArgumentOutOfRangeException(nameof(newState), newState, null);
         }
+        State = newState;
         // trigger the action, ? prevents null pointer exceptions if no one subscribed.
         onGameStateChanged?.Invoke(newState);
     }
