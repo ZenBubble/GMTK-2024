@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Implements breakable walls/platforms
+/// Implements fragile platforms, break if player mass > maxMass
 /// </summary>
 public class FragilePlatform : MonoBehaviour
 {
@@ -20,6 +20,9 @@ public class FragilePlatform : MonoBehaviour
         playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
     }
 
+    /// <summary>
+    /// Check if platform is touching player. If player exceeds maxMass, break 
+    /// </summary>
     private void FixedUpdate()
     {
         if (boxCollider.IsTouching(contactFilter))
