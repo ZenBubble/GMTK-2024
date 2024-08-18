@@ -14,7 +14,8 @@ public class GekkoScript : MonoBehaviour
     [SerializeField] private float initialMass = 20.0f;
     [SerializeField] private float jumpMassConsumption = 0.1f;
     [SerializeField] private float runMassConsumption = 0.05f;
-    
+
+    [SerializeField] private float minPlayerMass = 1;
     //Variables control the various actions the player can perform at any time.
     //These are fields which can are public allowing for other sctipts to read them
     //but can only be privately written to.
@@ -50,7 +51,12 @@ public class GekkoScript : MonoBehaviour
         originalScale = transform.localScale;
         rigidBody.mass = initialMass;
     }
-
+    
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+	    Run(1);
+    }
 
     private void Update()
     {
@@ -64,6 +70,11 @@ public class GekkoScript : MonoBehaviour
 	    _moveInput.x = Input.GetAxisRaw("Horizontal");
 	    _moveInput.y = Input.GetAxisRaw("Vertical");
 
+	    if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) 
+	        || Input.GetKeyDown(KeyCode.LeftArrow))
+	    {
+		    rigidBody.mass = Math.Max(rigidBody.mass - runMassConsumption, minPlayerMass);
+	    }
 	    if (_moveInput.x != 0)
 		    CheckDirectionToFace(_moveInput.x > 0);
 
@@ -84,13 +95,8 @@ public class GekkoScript : MonoBehaviour
 			//Ground Check
 			if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, groundLayer) && !IsJumping) //checks if set box overlaps with ground
 			{
-				Debug.Log("Grounded");
 				LastOnGroundTime = Data.coyoteTime; //if so sets the lastGrounded to coyoteTime
             }
-			else
-			{
-				Debug.Log("Airtime");
-			}
 
 			//Right Wall Check
 			if (((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && IsFacingRight)
@@ -107,13 +113,10 @@ public class GekkoScript : MonoBehaviour
 		if (IsJumping && rigidBody.velocity.y < 0)
 		{
 			IsJumping = false;
-
-			if(!IsWallJumping)
-				_isJumpFalling = true;
 		}
 		
 
-		if (LastOnGroundTime > 0 && !IsJumping && !IsWallJumping)
+		if (LastOnGroundTime > 0 && !IsJumping)
         {
 			_isJumpCut = false;
 
@@ -125,19 +128,12 @@ public class GekkoScript : MonoBehaviour
 		if (CanJump() && LastPressedJumpTime > 0)
 		{
 			IsJumping = true;
-			IsWallJumping = false;
 			_isJumpCut = false;
 			_isJumpFalling = false;
 			Jump();
 		}
 		#endregion	    
 	    
-    }
-
-    // Update is called once per frame
-    void FixedUpdate()
-    {
-	    Run(1);
     }
     
     private void Run(float lerpAmount)
@@ -212,7 +208,7 @@ public class GekkoScript : MonoBehaviour
 
 	public void OnJumpUpInput()
 	{
-		if (CanJumpCut() || CanWallJumpCut())
+		if (CanJumpCut())
 			_isJumpCut = true;
 	}
 	#endregion    
@@ -231,6 +227,7 @@ public class GekkoScript : MonoBehaviour
 		    force -= rigidBody.velocity.y;
 
 	    rigidBody.AddForce(Vector2.up * force, ForceMode2D.Impulse);
+	    rigidBody.mass = Math.Max(rigidBody.mass - jumpMassConsumption, minPlayerMass);
 	    #endregion
     }
     #region CHECK METHODS
@@ -248,11 +245,6 @@ public class GekkoScript : MonoBehaviour
     private bool CanJumpCut()
     {
 	    return IsJumping && rigidBody.velocity.y > 0;
-    }
-
-    private bool CanWallJumpCut()
-    {
-	    return IsWallJumping && rigidBody.velocity.y > 0;
     }
     #endregion
 

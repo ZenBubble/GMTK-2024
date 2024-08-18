@@ -717,6 +717,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6829283463612913817, guid: d5aad96e63710d0458d035e200582e51, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829283463612913817, guid: d5aad96e63710d0458d035e200582e51, type: 3}
+      propertyPath: m_GravityScale
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6829283463612913817, guid: d5aad96e63710d0458d035e200582e51, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7684847305115246743, guid: d5aad96e63710d0458d035e200582e51, type: 3}
       propertyPath: m_camera
       value: 
