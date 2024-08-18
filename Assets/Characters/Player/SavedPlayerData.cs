@@ -52,6 +52,11 @@ public class SavedPlayerData : ScriptableObject
 	[Range(0.01f, 0.5f)] public float coyoteTime; //Grace period after falling off a platform, where you can still jump
 	[Range(0.01f, 0.5f)] public float jumpInputBufferTime; //Grace period after pressing jump where a jump will be automatically performed once the requirements (eg. being grounded) are met.
 	
+	[Header("Mass")]
+	public float initialPlayerMass = 20.0f;
+	public float jumpMassConsumption = 0.1f;
+	public float runMassConsumption = 0.05f;
+	public float minPlayerMass = 10.0f;
 
 	//Unity Callback, called when the inspector updates
     private void OnValidate()

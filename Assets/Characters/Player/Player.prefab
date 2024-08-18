@@ -159,7 +159,7 @@ MonoBehaviour:
   maxDistnace: 20
   launchToPoint: 1
   launchType: 1
-  launchSpeed: 1
+  launchSpeed: 20
   autoConfigureDistance: 0
   targetDistance: 3
   targetFrequncy: 1
@@ -398,9 +398,6 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 90
     maxNormalAngle: 90
-  initialMass: 20
-  jumpMassConsumption: 0.1
-  runMassConsumption: 0.05
   _groundCheckPoint: {fileID: 7815622903263593365}
   _groundCheckSize: {x: 0.49, y: 0.03}
   _frontWallCheckPoint: {fileID: 1288707839600159015}

@@ -11,11 +11,7 @@ public class GekkoScript : MonoBehaviour
 
     private Vector3 originalScale;
     [SerializeField] private ContactFilter2D contactFilter;
-    [SerializeField] private float initialMass = 20.0f;
-    [SerializeField] private float jumpMassConsumption = 0.1f;
-    [SerializeField] private float runMassConsumption = 0.05f;
 
-    [SerializeField] private float minPlayerMass = 1;
     //Variables control the various actions the player can perform at any time.
     //These are fields which can are public allowing for other sctipts to read them
     //but can only be privately written to.
@@ -49,7 +45,7 @@ public class GekkoScript : MonoBehaviour
     {
         rigidBody = GetComponent<Rigidbody2D>();
         originalScale = transform.localScale;
-        rigidBody.mass = initialMass;
+        rigidBody.mass = Data.initialPlayerMass;
     }
     
     // Update is called once per frame
@@ -73,7 +69,7 @@ public class GekkoScript : MonoBehaviour
 	    if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) 
 	        || Input.GetKeyDown(KeyCode.LeftArrow))
 	    {
-		    rigidBody.mass = Math.Max(rigidBody.mass - runMassConsumption, minPlayerMass);
+		    rigidBody.mass = Math.Max(rigidBody.mass - Data.runMassConsumption, Data.minPlayerMass);
 	    }
 	    if (_moveInput.x != 0)
 		    CheckDirectionToFace(_moveInput.x > 0);
@@ -227,7 +223,7 @@ public class GekkoScript : MonoBehaviour
 		    force -= rigidBody.velocity.y;
 
 	    rigidBody.AddForce(Vector2.up * force, ForceMode2D.Impulse);
-	    rigidBody.mass = Math.Max(rigidBody.mass - jumpMassConsumption, minPlayerMass);
+	    rigidBody.mass = Math.Max(rigidBody.mass - Data.jumpMassConsumption, Data.minPlayerMass);
 	    #endregion
     }
     #region CHECK METHODS
