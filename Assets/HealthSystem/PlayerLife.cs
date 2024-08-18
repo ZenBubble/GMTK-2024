@@ -27,7 +27,6 @@ public class PlayerLife : MonoBehaviour
         isDead = false;
         rb = GetComponent<Rigidbody2D>();
         // screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        UpdateHealth();
     }
 
     // checks if out of bounds TODO: implement
@@ -50,7 +49,7 @@ public class PlayerLife : MonoBehaviour
         {
             UpdateHealth();
         }
-        if (currentHealth <= 0)
+        if (currentHealth == 0)
         {
             UpdateHealth();
             isDead = true;
@@ -60,14 +59,6 @@ public class PlayerLife : MonoBehaviour
     // updates the visual hearts in hearts
     private void UpdateHealth()
     {
-        if (currentHealth == 0)
-        {
-            foreach (Image heart in hearts)
-            {
-                heart.color = Color.black;
-            }
-        }
-        else {
             for (int i = 0; i < hearts.Length; i++)
             {
                 if (i < currentHealth)
@@ -80,9 +71,6 @@ public class PlayerLife : MonoBehaviour
                     hearts[i].color = Color.black;
                 }
             }
-        }
-
-
     }
 }
 
