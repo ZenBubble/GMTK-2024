@@ -18,7 +18,7 @@ public class BreakableScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Vector3 normal = collision.contacts[0].normal;
+            Vector3 normal = collision.GetContact(0).normal;
             float mass = collision.gameObject.GetComponent<Rigidbody2D>().mass;
             float velocity = collision.relativeVelocity.magnitude;
 
