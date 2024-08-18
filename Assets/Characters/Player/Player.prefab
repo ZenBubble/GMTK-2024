@@ -94,7 +94,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 805991742721622634}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -349,11 +349,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9fdbc3a6739218488d7dc648a0b37ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpHeight: 12
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  Data: {fileID: 11400000, guid: 1fa8aba6bfac5ee4abe323a5dad31c72, type: 2}
   contactFilter:
     useTriggers: 0
     useLayerMask: 1
@@ -368,6 +364,17 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 90
     maxNormalAngle: 90
+  initialMass: 20
+  jumpMassConsumption: 0.1
+  runMassConsumption: 0.05
+  _groundCheckPoint: {fileID: 1421192124968073560}
+  _groundCheckSize: {x: 0.49, y: 0.03}
+  _frontWallCheckPoint: {fileID: 1421192124968073560}
+  _backWallCheckPoint: {fileID: 1421192124968073560}
+  _wallCheckSize: {x: 1.8, y: 2}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &3325504012642310191
 GameObject:
   m_ObjectHideFlags: 0
