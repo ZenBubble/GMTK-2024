@@ -95,12 +95,12 @@ public class GekkoScript : MonoBehaviour
             }
 
 			//Right Wall Check
-			if (((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && IsFacingRight)
-					|| (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && !IsFacingRight)) && !IsWallJumping) ;
+			if ((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && IsFacingRight)
+					|| (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && !IsFacingRight)) ;
 
 			//Right Wall Check
-			if (((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && !IsFacingRight)
-				|| (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && IsFacingRight)) && !IsWallJumping);
+			if ((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && !IsFacingRight)
+				|| (Physics2D.OverlapBox(_backWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && IsFacingRight));
 			
 		}
 		#endregion

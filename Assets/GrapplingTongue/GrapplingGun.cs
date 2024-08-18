@@ -160,7 +160,6 @@ public class GrapplingGun : MonoBehaviour
 
     public void Grapple()
     {
-        Debug.Log("YANKING");
         m_springJoint2D.autoConfigureDistance = false;
         if (!launchToPoint && !autoConfigureDistance)
         {
