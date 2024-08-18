@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 
-// Manage behaviour of the draggable handles that allow scaling of objects
+/// <summary>
+/// Manage behaviour of the draggable handles that allow scaling of objects
+/// </summary>
 public class HandleScript : MonoBehaviour
 {
     // currently selected object
@@ -25,7 +27,10 @@ public class HandleScript : MonoBehaviour
         disableHandle();
     }
 
-    // places the handle in corresponding location given a selected object
+    /// <summary>
+    /// places the handle in corresponding location given a selected object
+    /// </summary>
+    /// <param name="s"></param>
     public void place(GameObject s)
     {
         // enable the handle first
@@ -48,7 +53,11 @@ public class HandleScript : MonoBehaviour
         minY = platformScript.getMinY();
     }
 
-    // update handle position given mouse location
+    /// <summary>
+    /// update handle position given mouse location
+    /// </summary>
+    /// <param name="mousePos"></param>
+    /// <param name="offset"></param>
     public void drag(Vector3 mousePos, Vector3 offset)
     {
         // update the stored size of the selected object
@@ -90,7 +99,11 @@ public class HandleScript : MonoBehaviour
         moveHandle(xPixelShift, yPixelShift);
     }
 
-    // resize the selected object given the shift in position of the handle
+    /// <summary>
+    /// resize the selected object given the shift in position of the handle
+    /// </summary>
+    /// <param name="xPixelShift"></param>
+    /// <param name="yPixelShift"></param>
     private void resizeSelected(float xPixelShift, float yPixelShift)
     {
         // original dimensions of the object. used to calculate how much the scale needs to be adjusted
@@ -111,25 +124,39 @@ public class HandleScript : MonoBehaviour
         selected.transform.position = new Vector3(newPosX, newPosY, selected.transform.position.z);
     }
 
-    // move the handle based on the shift of the mouse
+    /// <summary>
+    /// move the handle based on the shift of the mouse
+    /// </summary>
+    /// <param name="xPixelShift"></param>
+    /// <param name="yPixelShift"></param>
     private void moveHandle(float xPixelShift, float yPixelShift)
     {
         transform.position = new Vector3(transform.position.x + xPixelShift, transform.position.y + yPixelShift,
             transform.position.z);
     }
 
+    /// <summary>
+    /// enable handles
+    /// </summary>
     private void enableHandle()
     {
         GetComponent<SpriteRenderer>().enabled = true;
         GetComponent<BoxCollider2D>().enabled = true;
     }
 
+    /// <summary>
+    /// disable handles
+    /// </summary>
     public void disableHandle()
     {
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider2D>().enabled = false;
     }
 
+    /// <summary>
+    /// checks if bounding boxes are enabled (toggled in inspector)
+    /// </summary>
+    /// <returns></returns>
     private Boolean isBoundingBoxEnabled()
     {
         return transform.parent.gameObject.GetComponent<MouseScript>().isBoundingBoxEnabled();

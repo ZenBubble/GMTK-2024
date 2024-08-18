@@ -5,7 +5,9 @@ using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 
-// handles the scaling tool
+/// <summary>
+/// handles the scaling tool
+/// </summary>
 public class MouseScript : MonoBehaviour
 {
     private GameObject selected;

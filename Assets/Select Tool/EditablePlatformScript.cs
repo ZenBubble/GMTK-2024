@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
+/// <summary>
+/// Manages the bounding box for editable platforms
+/// </summary>
 public class EditablePlatformScript : MonoBehaviour
 {
     [SerializeField] private float maxXRel;
@@ -19,7 +22,9 @@ public class EditablePlatformScript : MonoBehaviour
     private float originalPosY;
     private Vector2 size;
     
-
+    /// <summary>
+    /// Draws boundiing box but hides it until the platform is selected
+    /// </summary>
     private void Start()
     {
         initValues();
@@ -31,6 +36,10 @@ public class EditablePlatformScript : MonoBehaviour
         disableBoundingBox();
     }
 
+    /// <summary>
+    /// Converts from values relative to the edge of the platform to absolute global coordinates
+    /// </summary>
+    /// <returns></returns>
     public float getMaxX()
     {
         return originalPosX + size.x / 2f + maxXRel;
@@ -51,6 +60,9 @@ public class EditablePlatformScript : MonoBehaviour
         return originalPosY - size.y / 2f - minYRel;
     }
 
+    /// <summary>
+    /// Displays the bounding box in the editor
+    /// </summary>
     private void OnDrawGizmos()
     {
         initValues();
@@ -60,6 +72,9 @@ public class EditablePlatformScript : MonoBehaviour
             new Vector3(getMaxX() - getMinX(), getMaxY() - getMinY(), 0.01f));
     }
 
+    /// <summary>
+    /// Sets initial references, needed for gizmos
+    /// </summary>
     private void initValues()
     {
         size = boxCollider.bounds.size;
@@ -67,11 +82,17 @@ public class EditablePlatformScript : MonoBehaviour
         originalPosY = transform.position.y;
     }
 
+    /// <summary>
+    /// Enable the bounding box
+    /// </summary>
     public void enableBoundingBox()
     {
         lineRenderer.enabled = true;
     }
 
+    /// <summary>
+    /// Disable the bounding box
+    /// </summary>
     public void disableBoundingBox()
     {
         lineRenderer.enabled = false;
