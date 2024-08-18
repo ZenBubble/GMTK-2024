@@ -84,8 +84,13 @@ public class GekkoScript : MonoBehaviour
 			//Ground Check
 			if (Physics2D.OverlapBox(_groundCheckPoint.position, _groundCheckSize, 0, groundLayer) && !IsJumping) //checks if set box overlaps with ground
 			{
+				Debug.Log("Grounded");
 				LastOnGroundTime = Data.coyoteTime; //if so sets the lastGrounded to coyoteTime
-            }		
+            }
+			else
+			{
+				Debug.Log("Airtime");
+			}
 
 			//Right Wall Check
 			if (((Physics2D.OverlapBox(_frontWallCheckPoint.position, _wallCheckSize, 0, groundLayer) && IsFacingRight)
@@ -175,13 +180,12 @@ public class GekkoScript : MonoBehaviour
 		//Calculate difference between current velocity and desired velocity
 		float speedDif = targetSpeed - rigidBody.velocity.x;
 		//Calculate force along x-axis to apply to thr player
-
 		float movement = speedDif * accelRate;
-
+		
 		//Convert this to a vector and apply to rigidbody
 		rigidBody.AddForce(movement * Vector2.right, ForceMode2D.Force);
 
-		/*
+		/*	
 		 * For those interested here is what AddForce() will do
 		 * rigidBody.velocity = new Vector2(rigidBody.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / rigidBody.mass, rigidBody.velocity.y);
 		 * Time.fixedDeltaTime is by default in Unity 0.02 seconds equal to 50 FixedUpdate() calls per second

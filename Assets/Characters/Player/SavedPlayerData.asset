@@ -12,31 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3892e4dc54cfdb4dbaab3c98016808d, type: 3}
   m_Name: SavedPlayerData
   m_EditorClassIdentifier: 
-  gravityStrength: NaN
-  gravityScale: NaN
-  fallGravityMult: 0
-  maxFallSpeed: 0
-  fastFallGravityMult: 0
-  maxFastFallSpeed: 0
-  runMaxSpeed: 0
-  runAcceleration: 0.01
-  runAccelAmount: NaN
-  runDecceleration: 0.01
-  runDeccelAmount: NaN
-  accelInAir: 0
-  deccelInAir: 0
-  doConserveMomentum: 1
-  jumpHeight: 0
-  jumpTimeToApex: 0
-  jumpForce: NaN
-  jumpCutGravityMult: 0
-  jumpHangGravityMult: 0
-  jumpHangTimeThreshold: 0
-  jumpHangAccelerationMult: 0
-  jumpHangMaxSpeedMult: 0
-  wallJumpForce: {x: 0, y: 0}
-  wallJumpRunLerp: 0
-  wallJumpTime: 0
-  doTurnOnWallJump: 0
-  coyoteTime: 0.01
-  jumpInputBufferTime: 0.01
+  gravityStrength: -1.5
+  gravityScale: 0.1529052
+  fallGravityMult: 1
+  maxFallSpeed: 1
+  fastFallGravityMult: 1
+  maxFastFallSpeed: 1
+  runMaxSpeed: 14.67
+  runAcceleration: 14.67
+  runAccelAmount: 50
+  runDecceleration: 14.67
+  runDeccelAmount: 50
+  accelInAir: 0.471
+  deccelInAir: 0.476
+  doConserveMomentum: 0
+  jumpHeight: 3
+  jumpTimeToApex: 2
+  jumpForce: 3
+  jumpCutGravityMult: 1
+  jumpHangGravityMult: 0.433
+  jumpHangTimeThreshold: 1
+  jumpHangAccelerationMult: 1
+  jumpHangMaxSpeedMult: 1
+  coyoteTime: 0.12
+  jumpInputBufferTime: 0.143
