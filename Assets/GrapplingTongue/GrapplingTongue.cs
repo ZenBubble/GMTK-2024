@@ -59,6 +59,7 @@ public class GrapplingTongue : MonoBehaviour
 
     void DrawRope()
     {
+        Debug.Log("Running");
         if (!strightLine)
         {
             if (m_lineRenderer.GetPosition(percision - 1).x == grapplingGun.grapplePoint.x)
@@ -68,6 +69,8 @@ public class GrapplingTongue : MonoBehaviour
             else
             {
                 DrawRopeWaves();
+                grapplingGun.Grapple();
+                isGrappling = true;
             }
         }
         else
