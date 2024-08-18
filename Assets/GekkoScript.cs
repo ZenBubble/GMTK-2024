@@ -27,9 +27,11 @@ public class GekkoScript : MonoBehaviour
         // horizontal movement
         float horizontalInput = Input.GetAxis("Horizontal");
         rigidBody.velocity = new Vector2(horizontalInput * speed, rigidBody.velocity.y);
+
+        // sets animation to idle
         animator.SetFloat("xVelocity", 0);
 
-        // flip player sprite depending on movement direction
+        // flip player sprite depending on movement direction an updates animation
         if (horizontalInput > 0.01f)
         {
             transform.localScale = originalScale;

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+// Represents the health system of the player. Ensure that the object has all of the fields
 public class PlayerLife : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -25,11 +26,11 @@ public class PlayerLife : MonoBehaviour
         currentHealth = maxHealth;
         isDead = false;
         rb = GetComponent<Rigidbody2D>();
-        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
+        // screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
         UpdateHealth();
     }
 
-    // checks if out og bounds
+    // checks if out of bounds TODO: implement
     // void Update()
     // {
     //     if(transform.position.x < screenBounds.x * -4 || transform.position.x > screenBounds.x * 4){
@@ -41,7 +42,8 @@ public class PlayerLife : MonoBehaviour
     //     }        
     // }
 
-    public void TakeDamage(float damageAmount) //Paste this function and all its variables into anything that can TAKE DAMAGE
+    // called by other functions to deal damage. for now only sets isDead to true when health is 0.
+    public void TakeDamage(float damageAmount) 
     {
         currentHealth -= damageAmount;
         if (currentHealth > 0)
@@ -55,6 +57,7 @@ public class PlayerLife : MonoBehaviour
         }
     }
 
+    // updates the visual hearts in hearts
     private void UpdateHealth()
     {
         if (currentHealth == 0)
