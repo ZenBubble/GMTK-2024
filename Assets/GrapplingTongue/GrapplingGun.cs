@@ -150,6 +150,12 @@ public class GrapplingGun : MonoBehaviour
                         connectedObject = _hit.transform.gameObject;
                     }
 
+                    // check if the connected object is interactable? if yes, trigger the interaction function.
+                    Component[] hitComponents = _hit.transform.gameObject.GetComponents(typeof(IInteractable));
+                    if (hitComponents.Length > 0 && hitComponents[0] is IInteractable) {
+                        ((IInteractable)hitComponents[0]).OnInteraction();
+                    }
+
                     grapplePoint = _hit.point;
                     grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                     grappleRope.enabled = true;
