@@ -11,12 +11,14 @@ public class GekkoScript : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     private Vector3 originalScale;
     [SerializeField] private ContactFilter2D contactFilter;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         originalScale = transform.localScale;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -25,14 +27,17 @@ public class GekkoScript : MonoBehaviour
         // horizontal movement
         float horizontalInput = Input.GetAxis("Horizontal");
         rigidBody.velocity = new Vector2(horizontalInput * speed, rigidBody.velocity.y);
+        animator.SetFloat("xVelocity", 0);
 
         // flip player sprite depending on movement direction
         if (horizontalInput > 0.01f)
         {
             transform.localScale = originalScale;
+            animator.SetFloat("xVelocity", 1);
         } else if (horizontalInput < -0.01f)
         {
             transform.localScale = new Vector3(originalScale.x * -1, originalScale.y, originalScale.z);
+            animator.SetFloat("xVelocity", 1);
         }
 
         // vertical movement
