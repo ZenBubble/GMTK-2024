@@ -11,12 +11,16 @@ public class GekkoScript : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     private Vector3 originalScale;
     [SerializeField] private ContactFilter2D contactFilter;
+    [SerializeField] private float initialMass = 20.0f;
+    [SerializeField] private float jumpMassConsumption = 0.1f;
+    [SerializeField] private float runMassConsumption = 0.05f;
 
     // Start is called before the first frame update
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
         originalScale = transform.localScale;
+        rigidBody.mass = initialMass;
     }
 
     // Update is called once per frame
@@ -25,6 +29,11 @@ public class GekkoScript : MonoBehaviour
         // horizontal movement
         float horizontalInput = Input.GetAxis("Horizontal");
         rigidBody.velocity = new Vector2(horizontalInput * speed, rigidBody.velocity.y);
+
+        if (Input.GetKeyDown("Horizontal"))
+        {
+            rigidBody.mass -= runMassConsumption;
+        }
 
         // flip player sprite depending on movement direction
         if (horizontalInput > 0.01f)
@@ -48,9 +57,9 @@ public class GekkoScript : MonoBehaviour
         if (isGrounded())
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, jumpHeight);
+            rigidBody.mass -= jumpMassConsumption;
         }
     }
-
 
     // checks if player is grounded by sending a raycast downwards
     private Boolean isGrounded()
