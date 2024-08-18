@@ -68,6 +68,8 @@ public class GrapplingTongue : MonoBehaviour
             else
             {
                 DrawRopeWaves();
+                grapplingGun.Grapple();
+                isGrappling = true;
             }
         }
         else
