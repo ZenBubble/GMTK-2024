@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField] float currentHealth, maxHealth = 3f;
     [SerializeField] private AudioSource DeathSound;
+    [SerializeField] float mass;
+    private Rigidbody2D rigidBody;
     public float secondsPerAttack = 2;    
     public float damageToPlayer = 1;
     public float timer;
@@ -16,6 +18,8 @@ public class Enemy : MonoBehaviour
     {
         currentHealth = maxHealth;
         timer = Time.deltaTime;
+        rigidBody = GetComponent<Rigidbody2D>();
+        rigidBody.mass = mass;
     }
 
     // Allows other objects to deal damage to this object. Not currently implemented since tongue weapon isn't implemented yet
@@ -43,7 +47,7 @@ public class Enemy : MonoBehaviour
         if (collision.gameObject.TryGetComponent<PlayerLife>(out PlayerLife PlayerComponent))
         {
             //if (HitSound == null) Debug.LogError("HitSound is null on " + gameObject.name);
-            if (timer > secondsPerAttack)
+            if (timer > secondsPerAttack && PlayerComponent.rb.mass < mass)
             {
                 PlayerComponent.TakeDamage(damageToPlayer);
                 timer = 0;

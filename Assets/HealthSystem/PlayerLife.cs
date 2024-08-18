@@ -12,7 +12,7 @@ public class PlayerLife : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private Image[] hearts;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     private Vector3 screenBounds;
     public Boolean isDead;
     public GameObject player;
