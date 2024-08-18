@@ -166,7 +166,6 @@ public class GrapplingGun : MonoBehaviour
             m_springJoint2D.distance = targetDistance;
             m_springJoint2D.frequency = targetFrequncy;
         }
-
         if (!launchToPoint)
         {
             if (autoConfigureDistance)
