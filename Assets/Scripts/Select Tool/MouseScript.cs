@@ -16,6 +16,7 @@ public class MouseScript : MonoBehaviour
     [SerializeField] private LayerMask selectableLayers;
     [SerializeField] private LayerMask handleLayer;
     [SerializeField] private HandleScript[] handles;
+    [SerializeField] private Boolean boundingBoxEnabled;
     private Vector3 size;
     private float widthOffset;
     private float heightOffset;
@@ -53,6 +54,7 @@ public class MouseScript : MonoBehaviour
             {
                 // select the object and create the outline and handles
                 selected = objectHit.collider.gameObject;
+                selected.GetComponent<EditablePlatformScript>().enableBoundingBox();
                 offset = selected.transform.position - Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 transform.position = objectHit.transform.position;
                 lineRenderer.enabled = true;
@@ -61,10 +63,14 @@ public class MouseScript : MonoBehaviour
             }
             else
             {
-                // if nothing has been clicked, remove the selectioin
-                selected = null;
-                lineRenderer.enabled = false;
-                disableHandles();
+                // if nothing has been clicked, remove any selection
+                if (selected != null)
+                {
+                    selected.GetComponent<EditablePlatformScript>().disableBoundingBox();
+                    selected = null;
+                    lineRenderer.enabled = false;
+                    disableHandles();
+                }
             }
         }
         else if (Input.GetMouseButtonUp(0))
@@ -115,5 +121,10 @@ public class MouseScript : MonoBehaviour
         lineRenderer.SetPosition(1, selected.transform.position + new Vector3(widthOffset, heightOffset, 0));
         lineRenderer.SetPosition(2, selected.transform.position + new Vector3(widthOffset, -heightOffset, 0));
         lineRenderer.SetPosition(3, selected.transform.position + new Vector3(-widthOffset, -heightOffset, 0));
+    }
+
+    public Boolean isBoundingBoxEnabled()
+    {
+        return boundingBoxEnabled;
     }
 }
