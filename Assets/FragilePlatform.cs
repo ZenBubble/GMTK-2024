@@ -10,6 +10,8 @@ public class FragilePlatform : MonoBehaviour
 {
     [SerializeField] private float maxMass;
     [SerializeField] private ContactFilter2D contactFilter;
+    [SerializeField] Sprite normalSprite;
+    [SerializeField] Sprite brokenSprite;
     private BoxCollider2D boxCollider;
     private GameObject playerObject;
     private Rigidbody2D playerRigidBody;
@@ -17,6 +19,7 @@ public class FragilePlatform : MonoBehaviour
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        GetComponent<SpriteRenderer>().sprite = normalSprite;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
     }
@@ -40,7 +43,8 @@ public class FragilePlatform : MonoBehaviour
     /// </summary>
     private void breakObject()
     {
+        GetComponent<SpriteRenderer>().sprite = brokenSprite;
         GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<SpriteRenderer>().enabled = false;
+        //GetComponent<SpriteRenderer>().enabled = false;
     }
 }
