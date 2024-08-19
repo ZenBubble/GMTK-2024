@@ -228,7 +228,7 @@ Animator:
   m_GameObject: {fileID: 913189536808460267}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 10170330f9805d944b11690215bf8fa2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1074232b8b4422045b98b0d16476cf91, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -251,9 +251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c495c34766a3b724b87571246ba32b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 3
   DeathSound: {fileID: 0}
+  mass: 40
+  massGiven: 40
   secondsPerAttack: 2
   damageToPlayer: 1
   timer: 0
