@@ -97,7 +97,7 @@ public class GrapplingGun : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            if (connectedObject && connectedObject.HasComponent<SpringJoint2D>())
+            if (connectedObject)
             {
                 connectedObject.GetComponent<SpringJoint2D>().enabled = false;
             }
@@ -144,15 +144,10 @@ public class GrapplingGun : MonoBehaviour
             {
                 if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
                 {
-                    if (_hit.transform.gameObject.HasComponent<Rigidbody2D>())
+                    if (_hit.transform.gameObject.HasComponent<SpringJoint2D>() 
+                        && _hit.transform.gameObject.HasComponent<Rigidbody2D>())
                     {
                         connectedObject = _hit.transform.gameObject;
-                    }
-
-                    // check if the connected object is interactable? if yes, trigger the interaction function.
-                    Component[] hitComponents = _hit.transform.gameObject.GetComponents(typeof(IInteractable));
-                    if (hitComponents.Length > 0 && hitComponents[0] is IInteractable) {
-                        ((IInteractable)hitComponents[0]).OnInteraction();
                     }
 
                     grapplePoint = _hit.point;
@@ -191,11 +186,16 @@ public class GrapplingGun : MonoBehaviour
                     Vector2 distanceVector = firePoint.position - gunHolder.position;
                     if (connectedObject)
                     {
+                        SpringJoint2D otherSpring = connectedObject.GetComponent<SpringJoint2D>();
                         Rigidbody2D otherRb = connectedObject.GetComponent<Rigidbody2D>();
-                        m_springJoint2D.connectedBody = otherRb;
+                        
+                        otherSpring.connectedAnchor = gunHolder.transform.position;
+                        otherSpring.distance = distanceVector.magnitude;
+                        otherSpring.frequency = launchSpeed / otherRb.mass;
+                        otherSpring.enabled = true;
                     }
 
-                    m_springJoint2D.distance = 0;
+                    m_springJoint2D.distance = distanceVector.magnitude;
                     m_springJoint2D.frequency = launchSpeed / m_rigidbody.mass;
                     m_springJoint2D.enabled = true;
                     break;
