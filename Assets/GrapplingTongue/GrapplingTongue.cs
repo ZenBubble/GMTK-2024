@@ -57,7 +57,7 @@ public class GrapplingTongue : MonoBehaviour
         DrawRope();
     }
 
-    void DrawRope()
+    public void DrawRope()
     {
         if (!strightLine)
         {

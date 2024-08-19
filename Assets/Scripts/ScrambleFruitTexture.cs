@@ -1,6 +1,6 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
 
 public class ScrambleFruitTexture : MonoBehaviour
@@ -11,7 +11,7 @@ public class ScrambleFruitTexture : MonoBehaviour
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Sprite fruit = fruits[Random.Range(0, fruits.Length - 1)];
+        Sprite fruit = fruits[UnityEngine.Random.Range(0, fruits.Length - 1)];
         spriteRenderer.sprite = fruit; 
     }
 
