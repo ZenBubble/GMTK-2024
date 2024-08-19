@@ -8,8 +8,9 @@ using UnityEngine;
 public interface ILeverControllable
 {
     /// <summary>
-    /// Function will be called when the the lever is triggered
+    /// This will be called everytime when the lever state is changed 
+    /// (from off to on or from on to off)
     /// </summary>
     /// <param name="leverState">current new state of the lever</param>
-    void OnTriggered(bool leverState);
+    void OnLeverStateChanged(bool leverState);
 }

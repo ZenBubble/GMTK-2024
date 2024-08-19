@@ -20,18 +20,13 @@ public class DoorController : MonoBehaviour, ILeverControllable
         _collider2D = GetComponent<BoxCollider2D>();
     }
 
-    /// <summary>
-    /// Switch the open or close status of the door
-    /// </summary>
-    public void SwitchOpenOrClose() {
-        _isDoorOpen = !_isDoorOpen;
-        if (_isDoorOpen) {
+    public void OnLeverStateChanged(bool leverState) {
+        if (leverState) {
             _renderer.color = new Color(0, 0, 0);
             _collider2D.enabled = false;
+        } else {
+            _renderer.color = new Color(255, 255, 255);
+            _collider2D.enabled = true;
         }
-    }
-
-    public void OnTriggered(bool leverState) {
-        SwitchOpenOrClose();
     }
 }

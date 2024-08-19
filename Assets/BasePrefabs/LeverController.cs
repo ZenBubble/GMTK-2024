@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LeverController : MonoBehaviour, IInteractable
+public class LeverController : MonoBehaviour
 {
     private bool _isLeverOn;
     private Transform _leverTransform;
@@ -14,17 +14,26 @@ public class LeverController : MonoBehaviour, IInteractable
     void Start() {
         _isLeverOn = false;
         // get the transform component of the lever pivot
-        _leverTransform = this.gameObject.transform.parent.GetComponent<Transform>();
+        _leverTransform = this.gameObject.GetComponent<Transform>();
         _controllable = controllableGameObj?.GetComponent<ILeverControllable>();
+        // set the lever to off state
+        GetComponent<Rigidbody2D>().AddTorque(-100);
     }
 
-    public void SwitchLeverState() {
-        _isLeverOn = !_isLeverOn;
-        _leverTransform.rotation = _isLeverOn ? Quaternion.Euler(0, 0, 30) : Quaternion.Euler(0, 0, -30);
-    }
-
-    public void OnInteraction() {
-        SwitchLeverState();
-        _controllable.OnTriggered(_isLeverOn);
+    void Update() {
+        float rotation = _leverTransform.localEulerAngles.z;
+        if (rotation <= 120) {
+            // off
+            if (_isLeverOn) {
+                _controllable.OnLeverStateChanged(false);
+                _isLeverOn = false;
+            }
+        } else if (rotation > 120) {
+            // on
+            if (!_isLeverOn) {
+                _controllable.OnLeverStateChanged(true);
+                _isLeverOn = true;
+            }
+        }
     }
 }
