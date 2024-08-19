@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3690945292764426115}
   - component: {fileID: 1229475023357414780}
   - component: {fileID: 9105032142453332353}
+  - component: {fileID: 2109779234588113191}
   m_Layer: 0
   m_Name: Fruit
   m_TagString: Untagged
@@ -183,5 +184,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e30b5336014b8428503c3d15993e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1577099976704783834, guid: d5aad96e63710d0458d035e200582e51, type: 3}
   massGiven: 5
+--- !u!114 &2109779234588113191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763446761198692351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0a1effa737bea46ba4121e8efa072b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fruits:
+  - {fileID: -121158398, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: -438606090, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: 474869788, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: -1806006011, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: -604148337, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: -1569020840, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
