@@ -239,11 +239,6 @@ public class GrapplingGun : MonoBehaviour
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(firePoint.position, maxDistnace);
-            // Debug.Log(((m_camera.ScreenToWorldPoint(Input.mousePosition) - firePoint.position).normalized * maxDistnace).z);
-            // Gizmos.DrawLine(Vector3.zero, 
-            //     (m_camera.ScreenToWorldPoint(Input.mousePosition) - firePoint.position).normalized * maxDistnace);
-            // Gizmos.DrawSphere(firePoint.position + 
-            //                   (m_camera.ScreenToWorldPoint(Input.mousePosition) - firePoint.position).normalized * maxDistnace, 1f);
         }
     }
 }
