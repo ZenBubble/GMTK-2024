@@ -9,6 +9,12 @@ using UnityEngine;
 public class BreakableScript : MonoBehaviour
 {
     [SerializeField] float breakForce;
+    [SerializeField] Sprite normalSprite;
+    [SerializeField] Sprite brokenSprite;
+
+    private void Start() {
+        GetComponent<SpriteRenderer>().sprite = normalSprite;
+    }
 
     /// <summary>
     /// On collision with player, calculate kinetic energy of collision and break object if force exceeds break force
@@ -37,6 +43,7 @@ public class BreakableScript : MonoBehaviour
     private void breakObject()
     {
         GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<SpriteRenderer>().sprite = brokenSprite;
+        //GetComponent<SpriteRenderer>().enabled = false;
     }
 }

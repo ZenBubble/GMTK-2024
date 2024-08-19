@@ -144,3 +144,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakForce: 2000
+  normalSprite: {fileID: -1587656179, guid: 2c0cde0232d266f40a4e4ab8a1ed8ac4, type: 3}
+  brokenSprite: {fileID: 828113026, guid: 2c0cde0232d266f40a4e4ab8a1ed8ac4, type: 3}
