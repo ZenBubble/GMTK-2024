@@ -6,6 +6,7 @@ namespace Characters.Player
 	public class GekkoScript : MonoBehaviour
 	{
 		public SavedPlayerData Data;
+		public float runThreshhold;
 	
 		private Rigidbody2D rigidBody;
 
@@ -24,6 +25,7 @@ namespace Characters.Player
 		{
 			rigidBody = GetComponent<Rigidbody2D>();
 			anim = GetComponent<Animator>();
+			runThreshhold = 5;
 			originalScale = transform.localScale;
 			rigidBody.mass = Data.initialPlayerMass;
 			isFacingRight = (originalScale.x > 0);
@@ -60,6 +62,22 @@ namespace Characters.Player
 				jumping = false;
 			}
 			#endregion
+
+			#region ANIMATION HANDELING
+			if (rigidBody.velocity.x >= runThreshhold || rigidBody.velocity.x <= -runThreshhold) {
+				anim.SetFloat("xVelocity", 1);
+			} else if (rigidBody.velocity.x != 0){
+				anim.SetFloat("xVelocity", 0.5f);
+			} else {
+				anim.SetFloat("xVelocity", 0);
+			}
+
+			if (!isGrounded()) {
+				anim.SetBool("isAirborne", true);
+			} else {
+				anim.SetBool("isAirborne", false);
+			}
+			#endregion
 		}
     
 		private void Run(float lerpAmount)
@@ -92,18 +110,6 @@ namespace Characters.Player
 			float speedDif = targetSpeed - rigidBody.velocity.x;
 			//Calculate force along x-axis to apply to thr player
 			float movement = speedDif * accelRate;
-
-			if (movement > 0 || movement < 0) {
-				anim.SetFloat("xVelocity", 1);
-			} else {
-				anim.SetFloat("xVelocity", 0);
-			}
-
-			if (!isGrounded()) {
-				anim.SetBool("isAirborne", true);
-			} else {
-				anim.SetBool("isAirborne", false);
-			}
 		
 			//Convert this to a vector and apply to rigidbody
 			rigidBody.AddForce(movement * Vector2.right, ForceMode2D.Force);
