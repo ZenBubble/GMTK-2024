@@ -5,41 +5,26 @@ using UnityEngine;
 // Represents an enemy that can deal damage to any GameObject with PlayerLife
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] float currentHealth, maxHealth = 3f;
     [SerializeField] private AudioSource DeathSound;
     [SerializeField] float mass;
+    [SerializeField] private float massGiven;
     private Rigidbody2D rigidBody;
-    public float secondsPerAttack = 2;    
+    public float secondsPerAttack = 2;
     public float damageToPlayer = 1;
     public float timer;
+    private SpriteRenderer spriteRenderer;
+    private BoxCollider2D boxCollider;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
         timer = Time.deltaTime;
         rigidBody = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
         rigidBody.mass = mass;
     }
 
-    // Allows other objects to deal damage to this object. Not currently implemented since tongue weapon isn't implemented yet
-    // public void TakeDamage(float damageAmount) 
-    // {
-    //     if (gibsLocation != null)
-    //     {
-    //         gibsLocation.GetComponent<ParticleSystem>().Play();
-    //     }
-    //     else
-    //     {
-    //         GetComponent<ParticleSystem>().Play();
-    //     }
-    //     currentHealth -= damageAmount;
-    //     if (currentHealth <= 0)
-    //     {
-    //         DeathSound.Play();
-    //         DestroyFunction();
-    //     }
-    // }
 
     // Function for dealing damage to playerlife script. Use this for the tongue weapon
     private void OnCollisionStay2D(Collision2D collision) //Paste if this object can deal damage to something else
@@ -52,9 +37,19 @@ public class Enemy : MonoBehaviour
                 PlayerComponent.TakeDamage(damageToPlayer);
                 timer = 0;
             }
-
+            else if (PlayerComponent.rb.mass >= mass)
+            {
+                    PlayerComponent.GetComponent<Rigidbody2D>().mass = PlayerComponent.GetComponent<Rigidbody2D>().mass + massGiven;
+                    destroyObject();
+            }
         }
 
+    }
+
+    private void destroyObject()
+    {
+        spriteRenderer.enabled = false;
+        boxCollider.enabled = false;
     }
 
     void Update()
