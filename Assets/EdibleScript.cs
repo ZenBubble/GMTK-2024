@@ -29,7 +29,7 @@ public class EdibleScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            player.GetComponent<Rigidbody2D>().mass = player.GetComponent<Rigidbody2D>().mass + massGiven;
+            gekkoScript.eat(massGiven);
             destroyObject();
         }
     }
