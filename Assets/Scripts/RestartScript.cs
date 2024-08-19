@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class RestartScript : MonoBehaviour
 {
+
+    private bool _isReloading = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,9 @@ public class RestartScript : MonoBehaviour
     }
 
     public void RestartScene(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        if (!_isReloading) {
+            _isReloading = true;
+            GameManager.Instance.ReloadLevel();
+        }
     }
 }
