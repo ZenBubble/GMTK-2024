@@ -332,8 +332,8 @@ MonoBehaviour:
       m_Bits: 1792
     minDepth: 0
     maxDepth: 0
-    minNormalAngle: 90
-    maxNormalAngle: 90
+    minNormalAngle: 45
+    maxNormalAngle: 135
 --- !u!114 &7059987718944167433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -424,15 +424,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b58e5ad34fa84da40b7c659fa5c41855, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hearts:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   rb: {fileID: 0}
   isDead: 0
   player: {fileID: 0}
-  maxHealth: 100
-  currentHealth: 0
   timer: 0
   deathScreenTime: 100
 --- !u!1 &3325504012642310191
