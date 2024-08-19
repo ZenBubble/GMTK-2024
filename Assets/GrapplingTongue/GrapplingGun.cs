@@ -11,11 +11,6 @@ public class GrapplingGun : MonoBehaviour
 {
     [Header("Scripts Ref:")] public GrapplingTongue grappleRope;
 
-    [Header("Layers Settings:")] [SerializeField]
-    private bool grappleToAll = false;
-
-    [SerializeField] private int grappableLayerNumber = 9;
-
     [Header("Main Camera:")] public Camera m_camera;
 
     [Header("Transform Ref:")] public Transform gunHolder;
@@ -31,8 +26,13 @@ public class GrapplingGun : MonoBehaviour
     [Header("Distance:")] [SerializeField] private bool hasMaxDistance = false;
     [SerializeField] private float maxDistnace = 20;
 
+    [Header("Grappalable objects")]
+    [SerializeField] private LayerMask layerMask;
+
     private float defaultGravityScale;
     private GameObject connectedObject;
+
+    private Boolean shouldLaunch;
 
     private enum LaunchType
     {
@@ -54,6 +54,7 @@ public class GrapplingGun : MonoBehaviour
 
     [HideInInspector] public Vector2 grapplePoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
+    private LineRenderer ropeLineRenderer;
 
     private void Start()
     {
@@ -61,6 +62,7 @@ public class GrapplingGun : MonoBehaviour
         m_springJoint2D.enabled = false;
         connectedObject = null;
         defaultGravityScale = m_rigidbody.gravityScale;
+        ropeLineRenderer = grappleRope.GetComponent<LineRenderer>();
     }
 
     private void Update()
@@ -76,6 +78,15 @@ public class GrapplingGun : MonoBehaviour
                 if (connectedObject)
                 {
                     grapplePoint = connectedObject.transform.position;
+                }
+                else if (!shouldLaunch)
+                {
+                    int idx = ropeLineRenderer.positionCount - 1;
+                    Vector3 pos = ropeLineRenderer.GetPosition(idx);
+                    if (new Vector2(pos.x, pos.y).Equals(grapplePoint)) {
+                        grappleRope.enabled = false;
+                    }
+                    
                 }
                 RotateGun(grapplePoint, false);
             }
@@ -139,10 +150,11 @@ public class GrapplingGun : MonoBehaviour
         Vector2 distanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
         if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
         {
-            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized);
-            if (_hit.transform.gameObject.layer == grappableLayerNumber || grappleToAll)
+            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized, float.PositiveInfinity, layerMask);
+            if (_hit)
             {
-                if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
+                if (Vector2.Distance(_hit.point, firePoint.position) <= Math.Min(maxDistnace, distanceVector.magnitude)
+                    || !hasMaxDistance)
                 {
                     if (_hit.transform.gameObject.HasComponent<SpringJoint2D>() 
                         && _hit.transform.gameObject.HasComponent<Rigidbody2D>())
@@ -157,9 +169,15 @@ public class GrapplingGun : MonoBehaviour
                     grapplePoint = _hit.point;
                     grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                     grappleRope.enabled = true;
+                    shouldLaunch = true;
+                    return;
                 }
             }
         }
+        grapplePoint = m_camera.ScreenToWorldPoint(Input.mousePosition);
+        grappleDistanceVector = grapplePoint -(Vector2)gunPivot.position;
+        grappleRope.enabled = true;
+        shouldLaunch = false;
     }
 
     public void Grapple()
@@ -183,6 +201,10 @@ public class GrapplingGun : MonoBehaviour
         }
         else
         {
+            if (!shouldLaunch)
+            {
+                return;
+            }
             switch (launchType)
             {
                 case LaunchType.Physics_Launch:

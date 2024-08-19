@@ -160,7 +160,23 @@ namespace Characters.Player
 		{
 			return rigidBody.IsTouching(contactFilter);
 		}
-		#endregion
+        #endregion
+        public void updateScale()
+        {
+            float scaleMultiplier = rigidBody.mass / Data.initialPlayerMass;
+			if (!isFacingRight)
+			{
+				transform.localScale = new Vector3(-originalScale.x, originalScale.y, originalScale.z) * scaleMultiplier;
+			} else
+			{
+                transform.localScale = originalScale * scaleMultiplier;
+            }
+        }
 
-	}
+		public void eat(float massChange)
+		{
+            rigidBody.mass += massChange;
+			updateScale();
+        }
+    }
 }
