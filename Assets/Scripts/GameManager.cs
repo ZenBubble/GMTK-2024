@@ -143,7 +143,8 @@ public class GameManager : MonoBehaviour
     /// <exception cref="NotImplementedException"></exception>
     private void HandleWin()
     {
-        SwitchLevel(_level.NextLevel().ToIndex());
+        _level = _level.NextLevel();
+        SwitchLevel(_level.ToIndex());
     }
 
     /// <summary>
