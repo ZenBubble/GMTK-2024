@@ -11,12 +11,13 @@ public class FragilePlatform : MonoBehaviour
     [SerializeField] private float maxMass;
     [SerializeField] private ContactFilter2D contactFilter;
     private BoxCollider2D boxCollider;
-    [SerializeField] private GameObject playerObject;
+    private GameObject playerObject;
     private Rigidbody2D playerRigidBody;
 
     private void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
+        playerObject = GameObject.FindGameObjectWithTag("Player");
         playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
     }
 
