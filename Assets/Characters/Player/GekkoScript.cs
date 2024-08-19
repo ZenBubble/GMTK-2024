@@ -10,6 +10,7 @@ public class GekkoScript : MonoBehaviour
     private Rigidbody2D rigidBody;
 
     private Vector3 originalScale;
+	private Animator anim;
     [SerializeField] private ContactFilter2D contactFilter;
 
     //Variables control the various actions the player can perform at any time.
@@ -44,6 +45,7 @@ public class GekkoScript : MonoBehaviour
     void Start()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator>();
         originalScale = transform.localScale;
         rigidBody.mass = Data.initialPlayerMass;
     }
@@ -56,6 +58,7 @@ public class GekkoScript : MonoBehaviour
 
     private void Update()
     {
+		
 	    #region TIMERS
 	    LastOnGroundTime -= Time.deltaTime;
 
@@ -70,9 +73,12 @@ public class GekkoScript : MonoBehaviour
 	        || Input.GetKeyDown(KeyCode.LeftArrow))
 	    {
 		    rigidBody.mass = Math.Max(rigidBody.mass - Data.runMassConsumption, Data.minPlayerMass);
+			anim.SetFloat("xVelocity", 1);
 	    }
-	    if (_moveInput.x != 0)
+	    if (_moveInput.x != 0) {
 		    CheckDirectionToFace(_moveInput.x > 0);
+			anim.SetFloat("xVelocity", 0); // set animation to idle
+		}
 
 	    if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.C) || Input.GetKeyDown(KeyCode.J))
 	    {

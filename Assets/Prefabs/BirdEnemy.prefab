@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -4278605992759786144}
   - component: {fileID: -841572677097252678}
   m_Layer: 0
-  m_Name: BeetleEnemy 1
+  m_Name: BirdEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
