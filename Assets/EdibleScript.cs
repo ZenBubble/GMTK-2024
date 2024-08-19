@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class EdibleScript : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
     [SerializeField] private float massGiven;
+    private GameObject player;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D circleCollider;
     private GekkoScript gekkoScript;
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         gekkoScript = player.GetComponent<GekkoScript>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         circleCollider = GetComponent<CircleCollider2D>();
