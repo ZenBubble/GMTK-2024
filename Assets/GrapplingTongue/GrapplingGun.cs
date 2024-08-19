@@ -162,6 +162,10 @@ public class GrapplingGun : MonoBehaviour
                         connectedObject = _hit.transform.gameObject;
                     }
 
+                    if (_hit.transform.gameObject.tag == "Lever") {
+                        _hit.transform.gameObject.GetComponent<LeverController>().Toggle();
+                    }
+
                     grapplePoint = _hit.point;
                     grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                     grappleRope.enabled = true;
