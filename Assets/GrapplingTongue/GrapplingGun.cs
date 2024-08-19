@@ -153,8 +153,7 @@ public class GrapplingGun : MonoBehaviour
             RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized, float.PositiveInfinity, layerMask);
             if (_hit)
             {
-                if (Vector2.Distance(_hit.point, firePoint.position) <= Math.Min(maxDistnace, distanceVector.magnitude)
-                    || !hasMaxDistance)
+                if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
                 {
                     if (_hit.transform.gameObject.HasComponent<SpringJoint2D>() 
                         && _hit.transform.gameObject.HasComponent<Rigidbody2D>())
@@ -174,7 +173,8 @@ public class GrapplingGun : MonoBehaviour
                 }
             }
         }
-        grapplePoint = m_camera.ScreenToWorldPoint(Input.mousePosition);
+        grapplePoint = firePoint.position + 
+                       (Vector3)((Vector2)m_camera.ScreenToWorldPoint(Input.mousePosition) - (Vector2)firePoint.position).normalized * maxDistnace;
         grappleDistanceVector = grapplePoint -(Vector2)gunPivot.position;
         grappleRope.enabled = true;
         shouldLaunch = false;

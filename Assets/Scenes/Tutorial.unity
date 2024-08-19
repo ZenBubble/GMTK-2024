@@ -1652,6 +1652,14 @@ PrefabInstance:
       propertyPath: m_Anchor.y
       value: -0.833889
       objectReference: {fileID: 0}
+    - target: {fileID: 6882313305862734338, guid: d5aad96e63710d0458d035e200582e51, type: 3}
+      propertyPath: m_ConnectedAnchor.x
+      value: -4.0431795
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882313305862734338, guid: d5aad96e63710d0458d035e200582e51, type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -3.2504017
+      objectReference: {fileID: 0}
     - target: {fileID: 7684847305115246743, guid: d5aad96e63710d0458d035e200582e51, type: 3}
       propertyPath: m_camera
       value: 
