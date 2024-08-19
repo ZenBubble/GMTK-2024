@@ -251,9 +251,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c495c34766a3b724b87571246ba32b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 3
   DeathSound: {fileID: 0}
+  mass: 10
+  massGiven: 5
   secondsPerAttack: 2
   damageToPlayer: 1
   timer: 0
