@@ -14,11 +14,13 @@ public class Enemy : MonoBehaviour
     public float timer;
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
         timer = Time.deltaTime;
+        player = GameObject.FindGameObjectWithTag("Player");
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
@@ -27,19 +29,19 @@ public class Enemy : MonoBehaviour
 
 
     // Function for dealing damage to playerlife script. Use this for the tongue weapon
-    private void OnCollisionStay2D(Collision2D collision) //Paste if this object can deal damage to something else
+    private void OnCollisionEnter2D(Collision2D collision) //Paste if this object can deal damage to something else
     {
-        if (collision.gameObject.TryGetComponent<PlayerLife>(out PlayerLife PlayerComponent))
+        if (collision.gameObject.tag == "Player")
         {
             //if (HitSound == null) Debug.LogError("HitSound is null on " + gameObject.name);
-            if (timer > secondsPerAttack && PlayerComponent.rb.mass < mass)
+            if (timer > secondsPerAttack && player.GetComponent<Rigidbody2D>().mass < mass)
             {
-                PlayerComponent.TakeDamage(damageToPlayer);
+                player.GetComponent<PlayerLife>().TakeDamage(damageToPlayer);
                 timer = 0;
             }
-            else if (PlayerComponent.rb.mass >= mass)
+            else if (player.GetComponent<Rigidbody2D>().mass >= mass)
             {
-                    PlayerComponent.GetComponent<Rigidbody2D>().mass = PlayerComponent.GetComponent<Rigidbody2D>().mass + massGiven;
+                    player.GetComponent<Rigidbody2D>().mass = player.GetComponent<Rigidbody2D>().mass + massGiven;
                     destroyObject();
             }
         }

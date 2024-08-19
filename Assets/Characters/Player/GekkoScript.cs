@@ -45,11 +45,9 @@ public class GekkoScript : MonoBehaviour
 	        || Input.GetKeyDown(KeyCode.LeftArrow))
 	    {
 		    // rigidBody.mass = Math.Max(rigidBody.mass - Data.runMassConsumption, Data.minPlayerMass);
-			anim.SetFloat("xVelocity", 1);
 	    }
 	    if (_moveInput.x != 0) {
 		    CheckDirectionToFace(_moveInput.x > 0);
-			anim.SetFloat("xVelocity", 0); // set animation to idle
 		}
 
 	    if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
@@ -70,6 +68,7 @@ public class GekkoScript : MonoBehaviour
 		float targetSpeed = _moveInput.x * Data.runMaxSpeed;
 		//We can reduce are control using Lerp() this smooths changes to are direction and speed
 		targetSpeed = Mathf.Lerp(rigidBody.velocity.x, targetSpeed, lerpAmount);
+
 
 		#region Calculate AccelRate
 		float accelRate;
@@ -93,6 +92,18 @@ public class GekkoScript : MonoBehaviour
 		float speedDif = targetSpeed - rigidBody.velocity.x;
 		//Calculate force along x-axis to apply to thr player
 		float movement = speedDif * accelRate;
+
+		if (movement > 0 || movement < 0) {
+			anim.SetFloat("xVelocity", 1);
+		} else {
+			anim.SetFloat("xVelocity", 0);
+		}
+
+		if (!isGrounded()) {
+			anim.SetBool("isAirborne", true);
+		} else {
+			anim.SetBool("isAirborne", false);
+		}
 		
 		//Convert this to a vector and apply to rigidbody
 		rigidBody.AddForce(movement * Vector2.right, ForceMode2D.Force);
