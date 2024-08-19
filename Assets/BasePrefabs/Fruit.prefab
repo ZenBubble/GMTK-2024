@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8546255328568421588}
   - component: {fileID: 3690945292764426115}
   - component: {fileID: 1229475023357414780}
+  - component: {fileID: -8620300856667545185}
   - component: {fileID: 9105032142453332353}
   m_Layer: 0
   m_Name: Fruit
@@ -171,6 +172,25 @@ SpringJoint2D:
   m_Distance: 1.7511139
   m_DampingRatio: 1
   m_Frequency: 1
+--- !u!114 &-8620300856667545185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1763446761198692351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0a1effa737bea46ba4121e8efa072b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fruits:
+  - {fileID: -121158398, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: -438606090, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: 474869788, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: -1806006011, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: -604148337, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
+  - {fileID: -1569020840, guid: 000dcf29f8e879040a4c84a735566d99, type: 3}
 --- !u!114 &9105032142453332353
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,5 +203,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88e30b5336014b8428503c3d15993e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1577099976704783834, guid: d5aad96e63710d0458d035e200582e51, type: 3}
   massGiven: 5
