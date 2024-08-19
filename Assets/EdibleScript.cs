@@ -6,15 +6,17 @@ using UnityEngine;
 public class EdibleScript : MonoBehaviour
 {
     [SerializeField] private float massGiven;
-    private GameObject player;
+    private GameObject _player;
     private SpriteRenderer spriteRenderer;
     private CircleCollider2D circleCollider;
+
     private GekkoScript gekkoScript;
+
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        gekkoScript = player.GetComponent<GekkoScript>();
+        _player = GameObject.FindGameObjectWithTag("Player");
+        gekkoScript = _player.GetComponent<GekkoScript>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         circleCollider = GetComponent<CircleCollider2D>();
     }
@@ -22,21 +24,23 @@ public class EdibleScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             gekkoScript.eat(massGiven);
-            destroyObject();
+            EatAction();
         }
     }
 
-    private void destroyObject()
+    /// <summary>
+    /// Custom EatAction behaviour, user-overrideable for different edible objects.
+    /// </summary>
+    protected virtual void EatAction()
     {
-        spriteRenderer.enabled = false;
-        circleCollider.enabled = false;
+        // do nothing
+        Destroy(gameObject);
     }
 }

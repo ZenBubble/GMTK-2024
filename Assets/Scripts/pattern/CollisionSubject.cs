@@ -10,13 +10,13 @@ namespace pattern
     /// </summary>
     public abstract class CollisionSubject : MonoBehaviour, IObservable<Collision>
     {
-        [SerializeField] private GameObject floor;
+        [SerializeField] private List<string> tagsToCollideWith;
         private readonly HashSet<IObserver<Collision>> _observers = new();
 
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.gameObject == floor) return;
+            if (!tagsToCollideWith.Contains(other.gameObject.tag)) return;
 
             foreach (var observer in _observers) observer.OnNext(other);
         }

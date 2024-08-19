@@ -134,8 +134,8 @@ GameObject:
   - component: {fileID: 249674345}
   - component: {fileID: 249674344}
   - component: {fileID: 249674343}
-  - component: {fileID: 249674342}
   - component: {fileID: 249674347}
+  - component: {fileID: 249674348}
   m_Layer: 0
   m_Name: WhatTheSigma
   m_TagString: Untagged
@@ -143,20 +143,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &249674342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249674341}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98a859a78883b4b9c9bf05126dac689c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floor: {fileID: 1781006085}
-  speed: 10
 --- !u!65 &249674343
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -270,6 +256,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &249674348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249674341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a859a78883b4b9c9bf05126dac689c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagsToCollideWith:
+  - Enemy
+  speed: 10
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,7 +375,7 @@ GameObject:
   - component: {fileID: 601135208}
   - component: {fileID: 601135207}
   - component: {fileID: 601135206}
-  - component: {fileID: 601135211}
+  - component: {fileID: 601135210}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -470,7 +471,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!114 &601135211
+--- !u!114 &601135210
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -479,10 +480,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 601135205}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7da3022337b248cc9905ce6f4af4d36, type: 3}
+  m_Script: {fileID: 11500000, guid: f4d383ac5aed466a936513c3849574b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collisionSubscription: {fileID: 249674342}
+  collisionSubscription: {fileID: 249674348}
   scaleFactorX: 2
   scaleFactorY: 1.5
   scaleFactorZ: 1
@@ -501,7 +502,7 @@ GameObject:
   - component: {fileID: 1291896082}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
