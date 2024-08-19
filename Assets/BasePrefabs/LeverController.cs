@@ -36,4 +36,13 @@ public class LeverController : MonoBehaviour
             }
         }
     }
+
+    public void Toggle() {
+        float rotation = _leverTransform.localEulerAngles.z;
+        if (_isLeverOn) {
+            GetComponent<Rigidbody2D>().AddTorque(-1000);
+        } else {
+            GetComponent<Rigidbody2D>().AddTorque(1000);
+        }
+    }
 }
