@@ -59,7 +59,9 @@ public class GekkoScript : MonoBehaviour
 	    {
 			jumping = false;
 	    }
-	    #endregion
+		#endregion
+
+		updateScale();
     }
     
     private void Run(float lerpAmount)
@@ -162,4 +164,10 @@ public class GekkoScript : MonoBehaviour
     }
     #endregion
 
+
+	private void updateScale()
+	{
+		float scaleMultiplier = rigidBody.mass / Data.initialPlayerMass;
+		transform.localScale = originalScale * scaleMultiplier;
+	}
 }
