@@ -15,7 +15,7 @@ namespace Characters.Player
 		private Boolean jumping;
 		private Boolean isFacingRight;
 		[SerializeField] private ContactFilter2D contactFilter;
-
+		[SerializeField] private AudioManager audioManager;
 
 		//Jump
 		private Vector2 _moveInput;
@@ -43,12 +43,16 @@ namespace Characters.Player
 			_moveInput.x = Input.GetAxisRaw("Horizontal");
 			_moveInput.y = Input.GetAxisRaw("Vertical");
 
-			if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) 
-			    || Input.GetKeyDown(KeyCode.LeftArrow))
+            if (isGrounded() && _moveInput.x != 0)
+            {
+                audioManager.PlayRunSFX();
+            } else
 			{
-				// rigidBody.mass = Math.Max(rigidBody.mass - Data.runMassConsumption, Data.minPlayerMass);
-			}
-			if (_moveInput.x != 0) {
+                audioManager.stopRunSFX();
+            }
+
+			if (_moveInput.x != 0)
+			{
 				CheckDirectionToFace(_moveInput.x > 0);
 			}
 
@@ -140,6 +144,7 @@ namespace Characters.Player
 		#endregion    
 		private void Jump()
 		{
+			audioManager.PlaySFX(audioManager.chameleonJump);
 			#region Perform Jump
 			//We increase the force applied if we are falling
 			//This means we'll always feel like we jump the same amount 
@@ -181,6 +186,14 @@ namespace Characters.Player
 
 		public void eat(float massChange)
 		{
+			if (massChange > 0)
+			{
+                audioManager.PlaySFX(audioManager.chameleonEat);
+            } else
+			{
+				audioManager.PlaySFX(audioManager.potionCollect);
+			}
+			
             rigidBody.mass += massChange;
 			updateScale();
         }
