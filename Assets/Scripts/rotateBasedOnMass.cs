@@ -10,6 +10,7 @@ public class rotateBasedOnMass : MonoBehaviour
     private float mass;
     private float maxWeight = 100;
     private float rotation;
+    [SerializeField] private float turningRate = 40;
     void Start()
     {
         rb = player.GetComponent<Rigidbody2D>();
@@ -20,6 +21,7 @@ public class rotateBasedOnMass : MonoBehaviour
     {
         mass = rb.mass;
         rotation = mass/maxWeight * -360;
-        transform.rotation = Quaternion.Euler(0, 0, rotation);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(0, 0, rotation), 
+            turningRate * Time.deltaTime);
     }
 }
