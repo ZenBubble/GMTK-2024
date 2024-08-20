@@ -187,7 +187,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 1
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -198,7 +198,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &2149701010723549908
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -335,10 +335,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DeathSound: {fileID: 0}
   mass: 26
-  massGiven: 40
-  secondsPerAttack: 2
-  damageToPlayer: 1
-  timer: 0
+  massGiven: 10
+  minRelX: 2
+  maxRelX: 2
+  speed: 3
 --- !u!223 &8356998361018360370
 Canvas:
   m_ObjectHideFlags: 0
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &8268873083692257564
 MonoBehaviour:
   m_ObjectHideFlags: 0
