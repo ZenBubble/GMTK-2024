@@ -3,16 +3,18 @@ using Unity.VisualScripting;
 
 public enum CurrentLevel
 {
-    Tutorial = 0,
-    One = 1,
-    Two = 2,
-    Three = 3,
+    Menu = 0,
+    Tutorial = 1,
+    One = 2,
+    Two = 3,
+    Three = 4,
     Boss // maybe not yet, decide on boss level.
 }
 
 public static class CurrentLevelMethods
 {
     public static CurrentLevel NextLevel(this CurrentLevel level) => level switch {
+
         CurrentLevel.Tutorial => CurrentLevel.One,
         CurrentLevel.One => CurrentLevel.Two,
         CurrentLevel.Two => CurrentLevel.Three,
@@ -21,11 +23,12 @@ public static class CurrentLevelMethods
     };
     
     public static int ToIndex(this CurrentLevel level) => level switch {
-        CurrentLevel.Tutorial => 0,
-        CurrentLevel.One => 1,
-        CurrentLevel.Two => 2,
-        CurrentLevel.Three => 3,
-        CurrentLevel.Boss => 4,
+        CurrentLevel.Menu => 0,
+        CurrentLevel.Tutorial => 1,
+        CurrentLevel.One => 2,
+        CurrentLevel.Two => 3,
+        CurrentLevel.Three => 4,
+        CurrentLevel.Boss => 5,
         _ => throw new ArgumentOutOfRangeException("level")
     };
 }
