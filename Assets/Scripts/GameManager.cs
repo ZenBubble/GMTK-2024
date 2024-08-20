@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 {
     // current game state
     public GameState State;
-    [SerializeField] private CurrentLevel _level = CurrentLevel.Tutorial;
+    [SerializeField] private CurrentLevel _level = CurrentLevel.Menu;
 
 
     // actions to trigger when game state changes
