@@ -268,7 +268,7 @@ GameObject:
   - component: {fileID: 8373290337372230252}
   m_Layer: 0
   m_Name: AudioManager
-  m_TagString: Untagged
+  m_TagString: Audio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -316,6 +316,8 @@ MonoBehaviour:
   chameleonDeath: {fileID: 8300000, guid: a9331238519174600bea1520babf1901, type: 3}
   mainMusic: {fileID: 8300000, guid: b9ff0ca0d53ba4c59a32aa9ab7fd3e5c, type: 3}
   desertMusic: {fileID: 8300000, guid: 459846050485b42268e877032dfe767b, type: 3}
+  pressurePlate: {fileID: 0}
+  lever: {fileID: 0}
 --- !u!1 &4756794968550701857
 GameObject:
   m_ObjectHideFlags: 0
