@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Characters.Player;
 using UnityEngine;
 
 // Represents an enemy that can deal damage to any GameObject with PlayerLife
@@ -42,7 +41,7 @@ public class Enemy : MonoBehaviour
             }
             else if (player.GetComponent<Rigidbody2D>().mass >= mass)
             {
-                    player.GetComponent<GekkoScript>().eat(massGiven);
+                    player.GetComponent<Rigidbody2D>().mass = player.GetComponent<Rigidbody2D>().mass + massGiven;
                     destroyObject();
             }
         }
