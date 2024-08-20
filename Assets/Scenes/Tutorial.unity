@@ -14029,7 +14029,7 @@ PrefabInstance:
     - target: {fileID: 5755448219815008755, guid: 7aa338cde82ed774185a36cb05b39d22, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: c3a4c20bef374bb4db8b6ee3a6b7712f, type: 3}
+      objectReference: {fileID: 21300000, guid: 607443cc37c110a448d156eec997e09f, type: 3}
     - target: {fileID: 5755448219815008755, guid: 7aa338cde82ed774185a36cb05b39d22, type: 3}
       propertyPath: m_DrawMode
       value: 2
@@ -30403,9 +30403,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!4 &1487448334 stripped
 Transform:
