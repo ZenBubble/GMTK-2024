@@ -31,15 +31,4 @@ public static class CurrentLevelMethods
         CurrentLevel.Boss => 5,
         _ => throw new ArgumentOutOfRangeException("level")
     };
-
-    public static CurrentLevel ToLevel(int level) => level switch
-    {
-        0 => CurrentLevel.Menu,
-        1 => CurrentLevel.Tutorial,
-        2 => CurrentLevel.One,
-        3 => CurrentLevel.Two,
-        4 => CurrentLevel.Three,
-        5 => CurrentLevel.Boss,
-        _ => throw new ArgumentOutOfRangeException("level")
-    };
 }
