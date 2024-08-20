@@ -22,7 +22,7 @@ TagManager:
   - Editable platform
   - Breakable
   - Consumable
-  - 
+  - Tongueable
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
   - Player
   - Enemy
   m_SortingLayers:
+  - name: Background
+    uniqueID: 2360902325
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

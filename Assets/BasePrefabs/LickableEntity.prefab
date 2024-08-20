@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8924528475813928808}
   - component: {fileID: 4853284858952027985}
   - component: {fileID: 3966270815189850783}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: LickableEntity
   m_TagString: Untagged
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
