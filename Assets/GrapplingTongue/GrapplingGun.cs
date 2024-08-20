@@ -56,6 +56,13 @@ public class GrapplingGun : MonoBehaviour
     [HideInInspector] public Vector2 grappleDistanceVector;
     private LineRenderer ropeLineRenderer;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     private void Start()
     {
         grappleRope.enabled = false;
@@ -70,6 +77,7 @@ public class GrapplingGun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             SetGrapplePoint();
+            audioManager.PlaySFX(audioManager.chameleonSlurp);
         }
         else if (Input.GetKey(KeyCode.Mouse1))
         {

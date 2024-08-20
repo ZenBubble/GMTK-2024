@@ -12,6 +12,13 @@ public class EdibleScript : MonoBehaviour
 
     private GekkoScript gekkoScript;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +39,7 @@ public class EdibleScript : MonoBehaviour
         {
             gekkoScript.eat(massGiven);
             EatAction();
+            audioManager.PlaySFX(audioManager.chameleonEat);
         }
     }
 
