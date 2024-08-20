@@ -16,6 +16,13 @@ namespace Characters.Player
 		private Boolean isFacingRight;
 		[SerializeField] private ContactFilter2D contactFilter;
 
+		AudioManager audioManager;
+
+		private void Awake()
+        {
+			audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); 
+        }
+
 		private bool _isGameOver = false;
 
 
@@ -51,11 +58,26 @@ namespace Characters.Player
 				// rigidBody.mass = Math.Max(rigidBody.mass - Data.runMassConsumption, Data.minPlayerMass);
 			}
 			if (_moveInput.x != 0) {
+
 				CheckDirectionToFace(_moveInput.x > 0);
 			}
 
-			if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+			if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W))
 			{
+				audioManager.PlaySFX(audioManager.chameleonRun);
+			}
+
+			//if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W))
+			//{
+
+			//	AudioSource.Stop; 
+			//}
+
+			
+
+			if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+			{
+				audioManager.PlaySFX(audioManager.chameleonJump); 
 				jumping = true;
 			}
 

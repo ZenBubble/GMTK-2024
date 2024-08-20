@@ -9,6 +9,7 @@ TagManager:
   - PressurePlate
   - Lever
   - Enemy
+  - Audio
   layers:
   - Default
   - TransparentFX
