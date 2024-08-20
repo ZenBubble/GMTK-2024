@@ -9,15 +9,27 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 049ccc55a903d2c4a9f373bbbaacee2c
   - enabled: 1
-    path: Assets/Scenes/IntroCutScene.unity
+    path: Assets/Scenes/TimelineCutscenes/IntroCutScene.unity
     guid: 4b703f9af21fcf6469ff4185fa034372
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
     guid: bb4b8b7e9d9e5214da500979fc99e2c4
   - enabled: 1
+    path: Assets/Scenes/TimelineCutscenes/CutScene1.unity
+    guid: 3c87430a07d1f4ab294a9601520482f9
+  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: eeca832360ef54e468e188405f8b26ab
   - enabled: 1
+    path: Assets/Scenes/TimelineCutscenes/CutScene2.unity
+    guid: eb8156b9e21e744d180ad88ed4e5990a
+  - enabled: 1
     path: Assets/Scenes/Level2.unity
     guid: 0e5fe37e4cdb3458db64404429a792fc
+  - enabled: 1
+    path: Assets/Scenes/TimelineCutscenes/CutScene3.unity
+    guid: 93e8acc87a9be4359b96446ac02d7388
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 77b5be4fd871345038569facc4aff21b
   m_configObjects: {}
