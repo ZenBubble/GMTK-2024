@@ -1671,6 +1671,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1411237144656761305, guid: d5aad96e63710d0458d035e200582e51, type: 3}
+      propertyPath: maxX
+      value: 171.5
+      objectReference: {fileID: 0}
+    - target: {fileID: -1411237144656761305, guid: d5aad96e63710d0458d035e200582e51, type: 3}
+      propertyPath: maxY
+      value: 9.07
+      objectReference: {fileID: 0}
+    - target: {fileID: -1411237144656761305, guid: d5aad96e63710d0458d035e200582e51, type: 3}
+      propertyPath: minX
+      value: -22.2
+      objectReference: {fileID: 0}
+    - target: {fileID: -1411237144656761305, guid: d5aad96e63710d0458d035e200582e51, type: 3}
+      propertyPath: minY
+      value: -22.1
+      objectReference: {fileID: 0}
     - target: {fileID: 108835817278259952, guid: d5aad96e63710d0458d035e200582e51, type: 3}
       propertyPath: contactFilter.useTriggers
       value: 0
