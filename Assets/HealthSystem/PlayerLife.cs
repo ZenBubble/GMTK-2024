@@ -23,6 +23,12 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] float minX = 200;
     [SerializeField] float minY = -200;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
 
     void Start()
     {
@@ -36,6 +42,7 @@ public class PlayerLife : MonoBehaviour
         if (transform.position.x < minX || transform.position.x > maxX ||
             transform.position.y < minY || transform.position.y > maxY)
         {
+            audioManager.PlaySFX(audioManager.chameleonDamage);
             playerDie();
         }
     }

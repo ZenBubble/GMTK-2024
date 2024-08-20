@@ -59,6 +59,13 @@ public class GrapplingGun : MonoBehaviour
     [SerializeField] private float timeToDisableRope = 0.5f;
     private float disableTimer = 0f;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     private void Start()
     {
         grappleRope.enabled = false;
@@ -73,6 +80,7 @@ public class GrapplingGun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             SetGrapplePoint();
+            audioManager.PlaySFX(audioManager.chameleonSlurp);
         }
         else if (Input.GetKey(KeyCode.Mouse1))
         {
@@ -163,6 +171,10 @@ public class GrapplingGun : MonoBehaviour
                             && _hit.transform.gameObject.HasComponent<Rigidbody2D>())
                         {
                             connectedObject = _hit.transform.gameObject;
+                            if (connectedObject.tag == "Enemy")
+                            {
+                                connectedObject.GetComponent<Enemy>().setGrab(true);
+                            }
                         }
 
                         if (_hit.transform.gameObject.tag == "Lever")
@@ -261,6 +273,10 @@ public class GrapplingGun : MonoBehaviour
         if (connectedObject)
         {
             connectedObject.GetComponent<SpringJoint2D>().enabled = false;
+            if (connectedObject.tag == "Enemy")
+            {
+                connectedObject.GetComponent<Enemy>().setGrab(false);
+            }
         }
 
         connectedObject = null;
