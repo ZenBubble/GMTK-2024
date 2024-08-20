@@ -154,7 +154,7 @@ MonoBehaviour:
   rotateOverTime: 1
   rotationSpeed: 17.6
   hasMaxDistance: 1
-  maxDistnace: 20
+  maxDistnace: 10
   layerMask:
     serializedVersion: 2
     m_Bits: 2147489792
@@ -166,6 +166,7 @@ MonoBehaviour:
   targetFrequncy: 1
   grapplePoint: {x: 0, y: 0}
   grappleDistanceVector: {x: 0, y: 0}
+  timeToDisableRope: 0.2
 --- !u!1 &1577099976704783834
 GameObject:
   m_ObjectHideFlags: 0
