@@ -15,15 +15,7 @@ namespace Characters.Player
 		private Boolean jumping;
 		private Boolean isFacingRight;
 		[SerializeField] private ContactFilter2D contactFilter;
-
-		AudioManager audioManager;
-
-		private void Awake()
-        {
-			audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>(); 
-        }
-
-		private bool _isGameOver = false;
+		[SerializeField] private AudioManager audioManager;
 
 		//Jump
 		private Vector2 _moveInput;
@@ -51,32 +43,21 @@ namespace Characters.Player
 			_moveInput.x = Input.GetAxisRaw("Horizontal");
 			_moveInput.y = Input.GetAxisRaw("Vertical");
 
-			if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow) 
-			    || Input.GetKeyDown(KeyCode.LeftArrow))
+            if (isGrounded() && _moveInput.x != 0)
+            {
+                audioManager.PlayRunSFX();
+            } else
 			{
-				// rigidBody.mass = Math.Max(rigidBody.mass - Data.runMassConsumption, Data.minPlayerMass);
-			}
-			if (_moveInput.x != 0) {
+                audioManager.stopRunSFX();
+            }
 
+			if (_moveInput.x != 0)
+			{
 				CheckDirectionToFace(_moveInput.x > 0);
 			}
 
-			if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.W))
+			if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
 			{
-				audioManager.PlaySFX(audioManager.chameleonRun);
-			}
-
-			//if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.W))
-			//{
-
-			//	AudioSource.Stop; 
-			//}
-
-			
-
-			if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
-			{
-				audioManager.PlaySFX(audioManager.chameleonJump); 
 				jumping = true;
 			}
 
@@ -163,6 +144,7 @@ namespace Characters.Player
 		#endregion    
 		private void Jump()
 		{
+			audioManager.PlaySFX(audioManager.chameleonJump);
 			#region Perform Jump
 			//We increase the force applied if we are falling
 			//This means we'll always feel like we jump the same amount 
@@ -204,6 +186,14 @@ namespace Characters.Player
 
 		public void eat(float massChange)
 		{
+			if (massChange > 0)
+			{
+                audioManager.PlaySFX(audioManager.chameleonEat);
+            } else
+			{
+				audioManager.PlaySFX(audioManager.potionCollect);
+			}
+			
             rigidBody.mass += massChange;
 			updateScale();
         }

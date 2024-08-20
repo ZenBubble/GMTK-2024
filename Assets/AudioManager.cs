@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -5,6 +6,7 @@ public class AudioManager : MonoBehaviour
     [Header("---------- Audio Source ----------")]
     [SerializeField] AudioSource musicSource;
     [SerializeField] AudioSource SFXSource;
+    [SerializeField] AudioSource RunSFXSource;
 
     [Header("---------- Audio Clip ----------")]
     public AudioClip chameleonJump;
@@ -18,6 +20,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip mainMusic;
     public AudioClip desertMusic;
 
+    [HideInInspector]
+    private Boolean isRunning = false;
+
     private void Start()
     {
         musicSource.clip = mainMusic;
@@ -29,4 +34,19 @@ public class AudioManager : MonoBehaviour
         SFXSource.PlayOneShot(clip);
     }
 
+    public void PlayRunSFX()
+    {
+        if (!isRunning)
+        {
+            isRunning = true;
+            RunSFXSource.clip = chameleonRun;
+            RunSFXSource.Play();
+        }
+        
+    }
+    public void stopRunSFX()
+    {
+        RunSFXSource.Stop();
+        isRunning = false;
+    }
 }
