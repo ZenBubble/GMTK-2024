@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Implements fragile platforms, break if player mass > maxMass
@@ -10,11 +11,13 @@ public class FragilePlatform : MonoBehaviour
 {
     [SerializeField] private float maxMass;
     [SerializeField] private ContactFilter2D contactFilter;
+    [SerializeField] private TextMeshProUGUI weightDisplay;
     [SerializeField] Sprite normalSprite;
     [SerializeField] Sprite brokenSprite;
     private BoxCollider2D boxCollider;
     private GameObject playerObject;
     private Rigidbody2D playerRigidBody;
+    
 
     private void Start()
     {
@@ -22,6 +25,7 @@ public class FragilePlatform : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = normalSprite;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
+        weightDisplay.text = maxMass.ToString();
     }
 
     /// <summary>
