@@ -24,7 +24,8 @@ public class PlayerLife : MonoBehaviour
     [SerializeField] float minY = -200;
 
     AudioManager audioManager;
-
+    private bool isPlayerDead = false;
+    
     private void Awake()
     {
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
@@ -40,8 +41,9 @@ public class PlayerLife : MonoBehaviour
      void Update()
     {
         if (transform.position.x < minX || transform.position.x > maxX ||
-            transform.position.y < minY || transform.position.y > maxY)
+            transform.position.y < minY || transform.position.y > maxY && !isPlayerDead)
         {
+            isPlayerDead = true;
             audioManager.PlaySFX(audioManager.chameleonDamage);
             playerDie();
         }

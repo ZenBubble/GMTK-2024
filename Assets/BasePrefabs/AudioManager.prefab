@@ -310,14 +310,12 @@ MonoBehaviour:
   chameleonEat: {fileID: 8300000, guid: f41be7beed12b4d188398b8dda875a6f, type: 3}
   chameleonRun: {fileID: 8300000, guid: ffbce275de7374b5599959465b824132, type: 3}
   potionCollect: {fileID: 8300000, guid: 825a2b42e81734714a178249446770a1, type: 3}
-  chameleonDamage: {fileID: 0}
+  chameleonDamage: {fileID: 8300000, guid: 2adcc18863fe4f84d8094cc0900b50af, type: 3}
   chameleonSlurp: {fileID: 8300000, guid: 4e620410ca51c46cf9d50b1c9d710260, type: 3}
-  chameleonSwing: {fileID: 0}
   chameleonDeath: {fileID: 8300000, guid: a9331238519174600bea1520babf1901, type: 3}
   mainMusic: {fileID: 8300000, guid: b9ff0ca0d53ba4c59a32aa9ab7fd3e5c, type: 3}
-  desertMusic: {fileID: 8300000, guid: 459846050485b42268e877032dfe767b, type: 3}
-  pressurePlate: {fileID: 0}
-  lever: {fileID: 0}
+  pressurePlate: {fileID: 8300000, guid: 6b496626f51f842e68157ed954ec3dce, type: 3}
+  lever: {fileID: 8300000, guid: 56e141b37d334449182e7e9c3af59c12, type: 3}
 --- !u!1 &4756794968550701857
 GameObject:
   m_ObjectHideFlags: 0
