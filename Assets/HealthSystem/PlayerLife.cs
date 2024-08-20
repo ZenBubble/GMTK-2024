@@ -34,14 +34,15 @@ public class PlayerLife : MonoBehaviour
     void Start()
     {
         restartScript = GetComponent<RestartScript>();
+        isPlayerDead = false;
         //currentHealth = maxHealth;
         // screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
      void Update()
     {
-        if (transform.position.x < minX || transform.position.x > maxX ||
-            transform.position.y < minY || transform.position.y > maxY && !isPlayerDead)
+        if ((transform.position.x < minX || transform.position.x > maxX ||
+            transform.position.y < minY || transform.position.y > maxY) && !isPlayerDead)
         {
             isPlayerDead = true;
             audioManager.PlaySFX(audioManager.chameleonDamage);
