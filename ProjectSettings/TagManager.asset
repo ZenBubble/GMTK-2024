@@ -46,12 +46,24 @@ TagManager:
   - Player
   - Enemy
   m_SortingLayers:
+  - name: Background
+    uniqueID: 999860381
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
   - name: Ground
     uniqueID: 3321585961
     locked: 0
+  - name: Platforms
+    uniqueID: 2675953343
+    locked: 0
+  - name: Interactable
+    uniqueID: 999217047
+    locked: 0
   - name: Select
     uniqueID: 3243194659
+    locked: 0
+  - name: Character
+    uniqueID: 2522611929
     locked: 0
