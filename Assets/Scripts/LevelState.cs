@@ -4,34 +4,37 @@ using Unity.VisualScripting;
 public enum CurrentLevel
 {
     Menu = 0,
-    IntroScene = 1,
+    IntroCutScene = 1,
     Tutorial = 2,
-    One = 3,
-    Two = 4,
-    Three = 5,
-    Boss = 6 // maybe not yet, decide on boss level.
+    CutScene1 = 3,
+    One = 4,
+    CutScene2 = 5, 
+    Two = 6,
+    CutScene3 = 7,
+    Three = 8,
 }
 
 public static class CurrentLevelMethods
 {
-    public static CurrentLevel NextLevel(this CurrentLevel level) => level switch {
-
-        CurrentLevel.Tutorial => CurrentLevel.IntroScene,
-        CurrentLevel.IntroScene => CurrentLevel.One,
-        CurrentLevel.One => CurrentLevel.Two,
-        CurrentLevel.Two => CurrentLevel.Three,
-        CurrentLevel.Three => CurrentLevel.Boss,
-        _ => throw new ArgumentOutOfRangeException("level", level, null)
-    };
+    public static CurrentLevel NextLevel(this CurrentLevel level) {
+        int index = level.ToIndex();
+        if (index >= 0 && index <= 7) {
+            return (CurrentLevel) (index + 1);
+        } else {
+            throw new ArgumentOutOfRangeException("level", level, null);
+        }
+    }
     
     public static int ToIndex(this CurrentLevel level) => level switch {
         CurrentLevel.Menu => 0,
-        CurrentLevel.IntroScene => 1,
+        CurrentLevel.IntroCutScene => 1,
         CurrentLevel.Tutorial => 2,
-        CurrentLevel.One => 3,
-        CurrentLevel.Two => 4,
-        CurrentLevel.Three => 5,
-        CurrentLevel.Boss => 6,
+        CurrentLevel.CutScene1 => 3,
+        CurrentLevel.One => 4,
+        CurrentLevel.CutScene2 => 5,
+        CurrentLevel.Two => 6,
+        CurrentLevel.CutScene3 => 7,
+        CurrentLevel.Three => 8,
         _ => throw new ArgumentOutOfRangeException("level", level, null)
     };
 }

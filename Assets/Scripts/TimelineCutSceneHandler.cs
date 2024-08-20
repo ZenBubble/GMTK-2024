@@ -8,6 +8,7 @@ public class IntroCutSceneHandler : MonoBehaviour
 
     private PlayableDirector _playableDirector;
     private bool _isAnimationFinished = false;
+    [SerializeField] private CurrentLevel _nextLevel = CurrentLevel.Menu;
 
     void Start() {
         _playableDirector = GetComponent<PlayableDirector>();
@@ -16,7 +17,7 @@ public class IntroCutSceneHandler : MonoBehaviour
 
     void Update() {
         if (!_isAnimationFinished && _playableDirector.time == _playableDirector.duration) {
-            GameManager.Instance.SwitchLevel(CurrentLevel.Tutorial.ToIndex());
+            GameManager.Instance.SwitchLevel(_nextLevel.ToIndex());
             _isAnimationFinished = true;
         }
     }
