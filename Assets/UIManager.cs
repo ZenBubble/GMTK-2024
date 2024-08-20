@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject controlsPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -32,14 +34,13 @@ public class UIManager : MonoBehaviour
     {
         pauseScreen.SetActive(status);
 
-
         if (status)
         {
             Time.timeScale = 0f;
         } else
         {
             Time.timeScale = 1f;
+            controlsPanel.SetActive(false);
         }
-        
     }
 }
