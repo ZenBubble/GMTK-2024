@@ -25,7 +25,9 @@ public class FragilePlatform : MonoBehaviour
         GetComponent<SpriteRenderer>().sprite = normalSprite;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         playerRigidBody = playerObject.GetComponent<Rigidbody2D>();
-        weightDisplay.text = maxMass.ToString();
+        if (weightDisplay != null) {
+            weightDisplay.text = maxMass.ToString();
+        }
     }
 
     /// <summary>
