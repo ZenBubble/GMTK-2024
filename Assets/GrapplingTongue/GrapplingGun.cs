@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BasePrefabs;
+using Unity.VisualScripting;
 
 /// <summary>
 /// Grabs onto defined layers or all surfaces. Can lasso enemies with both spring joints and rb2Ds. 
@@ -55,6 +56,8 @@ public class GrapplingGun : MonoBehaviour
     [HideInInspector] public Vector2 grapplePoint;
     [HideInInspector] public Vector2 grappleDistanceVector;
     private LineRenderer ropeLineRenderer;
+    [SerializeField] private float timeToDisableRope = 0.5f;
+    private float disableTimer = 0f;
 
     private void Start()
     {
@@ -84,7 +87,12 @@ public class GrapplingGun : MonoBehaviour
                     int idx = ropeLineRenderer.positionCount - 1;
                     Vector3 pos = ropeLineRenderer.GetPosition(idx);
                     if (new Vector2(pos.x, pos.y).Equals(grapplePoint)) {
-                        grappleRope.enabled = false;
+                        disableTimer += Time.deltaTime;
+                        if (disableTimer > timeToDisableRope)
+                        {
+                            grappleRope.enabled = false;
+                            disableTimer = 0;
+                        }
                     }
                     
                 }
@@ -108,15 +116,7 @@ public class GrapplingGun : MonoBehaviour
         }
         else if (Input.GetKeyUp(KeyCode.Mouse1))
         {
-            if (connectedObject)
-            {
-                connectedObject.GetComponent<SpringJoint2D>().enabled = false;
-            }
-
-            connectedObject = null;
-            grappleRope.enabled = false;
-            m_springJoint2D.enabled = false;
-            m_rigidbody.gravityScale = defaultGravityScale;
+            disableGrapple();
         }
         else
         {
@@ -147,32 +147,49 @@ public class GrapplingGun : MonoBehaviour
 
     void SetGrapplePoint()
     {
+        disableTimer = 0;
         Vector2 distanceVector = m_camera.ScreenToWorldPoint(Input.mousePosition) - gunPivot.position;
         if (Physics2D.Raycast(firePoint.position, distanceVector.normalized))
         {
-            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized, float.PositiveInfinity, layerMask);
+            RaycastHit2D _hit = Physics2D.Raycast(firePoint.position, distanceVector.normalized, maxDistnace, 
+                ~LayerMask.GetMask("Player"));
             if (_hit)
             {
-                if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
-                {
-                    if (_hit.transform.gameObject.HasComponent<SpringJoint2D>() 
-                        && _hit.transform.gameObject.HasComponent<Rigidbody2D>())
+                if ((layerMask & (1 << _hit.collider.gameObject.layer)) != 0) {
+                    // hit a grappalable object
+                    if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
                     {
-                        connectedObject = _hit.transform.gameObject;
-                    }
+                        if (_hit.transform.gameObject.HasComponent<SpringJoint2D>()
+                            && _hit.transform.gameObject.HasComponent<Rigidbody2D>())
+                        {
+                            connectedObject = _hit.transform.gameObject;
+                        }
 
-                    if (_hit.transform.gameObject.tag == "Lever") {
-                        _hit.transform.gameObject.GetComponent<LeverController>().Toggle();
-                    }
+                        if (_hit.transform.gameObject.tag == "Lever")
+                        {
+                            _hit.transform.gameObject.GetComponent<LeverController>().Toggle();
+                        }
 
+                        grapplePoint = _hit.point;
+                        grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
+                        grappleRope.enabled = true;
+                        shouldLaunch = true;
+                        return;
+                    }
+                } 
+                else
+                {
+                    // hit an object but not a grappalable one
                     grapplePoint = _hit.point;
                     grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                     grappleRope.enabled = true;
-                    shouldLaunch = true;
+                    shouldLaunch = false;
                     return;
                 }
+                
             }
         }
+        // hit nothing
         grapplePoint = firePoint.position + 
                        (Vector3)((Vector2)m_camera.ScreenToWorldPoint(Input.mousePosition) - (Vector2)firePoint.position).normalized * maxDistnace;
         grappleDistanceVector = grapplePoint -(Vector2)gunPivot.position;
@@ -231,6 +248,25 @@ public class GrapplingGun : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public GameObject getConnectedObject()
+    {
+        return connectedObject;
+    }
+
+    public void disableGrapple()
+    {
+        disableTimer = 0;
+        if (connectedObject)
+        {
+            connectedObject.GetComponent<SpringJoint2D>().enabled = false;
+        }
+
+        connectedObject = null;
+        grappleRope.enabled = false;
+        m_springJoint2D.enabled = false;
+        m_rigidbody.gravityScale = defaultGravityScale;
     }
 
     private void OnDrawGizmosSelected()
