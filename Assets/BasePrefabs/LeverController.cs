@@ -10,6 +10,7 @@ public class LeverController : MonoBehaviour
     public GameObject controllableGameObj;
 
     private ILeverControllable _controllable;
+    [SerializeField] private AudioManager audioManager;
 
     void Start() {
         _isLeverOn = false;
@@ -27,12 +28,14 @@ public class LeverController : MonoBehaviour
             if (_isLeverOn) {
                 _controllable.OnLeverStateChanged(false);
                 _isLeverOn = false;
+                audioManager.PlaySFX(audioManager.lever);
             }
         } else if (rotation > 120) {
             // on
             if (!_isLeverOn) {
                 _controllable.OnLeverStateChanged(true);
                 _isLeverOn = true;
+                audioManager.PlaySFX(audioManager.lever);
             }
         }
     }

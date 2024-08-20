@@ -13,6 +13,8 @@ public class DoorTrigger : MonoBehaviour
     // Mass threshold for the door to open
     public float massThreshold = 10.0f;
 
+    [SerializeField] private AudioManager audioManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,7 +39,9 @@ public class DoorTrigger : MonoBehaviour
                 door.transform.position += new Vector3(0, 5, 0);
                 isOpen = true;
             }
-            
+            audioManager.PlaySFX(audioManager.pressurePlate);
+
+
         }
         
     }
