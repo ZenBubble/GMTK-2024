@@ -18,6 +18,7 @@ public class SceneSwitchButton : MonoBehaviour
     }
 
     void onButtonClick() {
+        Debug.Log(levelIndex);
         // This is an example of switch level to levelIndex.
         GameManager.Instance.SwitchLevel(levelIndex);
         // This is an example of update game state to "onGame".
