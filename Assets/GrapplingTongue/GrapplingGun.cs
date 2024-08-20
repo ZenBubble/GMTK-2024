@@ -163,6 +163,10 @@ public class GrapplingGun : MonoBehaviour
                 ~LayerMask.GetMask("Player"));
             if (_hit)
             {
+                if (_hit.transform.gameObject.tag == "Lever")
+                {
+                    _hit.transform.gameObject.GetComponent<LeverController>().Toggle();
+                }
                 if ((layerMask & (1 << _hit.collider.gameObject.layer)) != 0) {
                     // hit a grappalable object
                     if (Vector2.Distance(_hit.point, firePoint.position) <= maxDistnace || !hasMaxDistance)
@@ -176,12 +180,6 @@ public class GrapplingGun : MonoBehaviour
                                 connectedObject.GetComponent<Enemy>().setGrab(true);
                             }
                         }
-
-                        if (_hit.transform.gameObject.tag == "Lever")
-                        {
-                            _hit.transform.gameObject.GetComponent<LeverController>().Toggle();
-                        }
-
                         grapplePoint = _hit.point;
                         grappleDistanceVector = grapplePoint - (Vector2)gunPivot.position;
                         grappleRope.enabled = true;

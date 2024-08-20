@@ -11,9 +11,8 @@ GameObject:
   - component: {fileID: 2215636134706787681}
   - component: {fileID: 9141984675964643789}
   - component: {fileID: 1487410289114890034}
-  - component: {fileID: 2067466860369191975}
-  - component: {fileID: 6277306473285438336}
-  - component: {fileID: 5434561563316942836}
+  - component: {fileID: 5749840573267601862}
+  - component: {fileID: 2148784279849895587}
   m_Layer: 0
   m_Name: LeverHandle
   m_TagString: Lever
@@ -102,7 +101,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllableGameObj: {fileID: 0}
   audioManager: {fileID: 0}
---- !u!50 &2067466860369191975
+--- !u!50 &5749840573267601862
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0
@@ -114,9 +113,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 100000
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -129,32 +128,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!233 &6277306473285438336
-HingeJoint2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2310570894448278437}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_EnableCollision: 1
-  m_ConnectedRigidBody: {fileID: 0}
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_BreakAction: 3
-  m_AutoConfigureConnectedAnchor: 1
-  m_Anchor: {x: -0.33025503, y: -5.905923}
-  m_ConnectedAnchor: {x: -0.032563757, y: -0.14648068}
-  m_UseMotor: 0
-  m_Motor:
-    m_MotorSpeed: 0
-    m_MaximumMotorForce: 5
-  m_UseLimits: 1
-  m_AngleLimits:
-    m_LowerAngle: -60
-    m_UpperAngle: -120
---- !u!61 &5434561563316942836
+--- !u!61 &2148784279849895587
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,7 +160,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.48259652, y: 0.8043263}
+  m_Offset: {x: -0.46788335, y: 0.81879544}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -197,7 +171,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.6086555, y: 14.190975}
+  m_Size: {x: 3.0615158, y: 15.319941}
   m_EdgeRadius: 0
 --- !u!1 &6184977546485209594
 GameObject:

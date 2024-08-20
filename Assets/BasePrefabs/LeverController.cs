@@ -15,7 +15,9 @@ public class LeverController : MonoBehaviour
     void Start() {
         _isLeverOn = false;
         // get the transform component of the lever pivot
+        _leverTransform = this.gameObject.transform.parent.GetComponent<Transform>();
         _controllable = controllableGameObj?.GetComponent<ILeverControllable>();
+        _leverTransform.rotation = Quaternion.Euler(0, 0, -50);
     }
 
     void Update() {
@@ -24,5 +26,10 @@ public class LeverController : MonoBehaviour
     public void Toggle() {
         _isLeverOn = !_isLeverOn;
         _controllable.OnLeverStateChanged(_isLeverOn);
+        if (_isLeverOn) {
+            _leverTransform.rotation = Quaternion.Euler(0, 0, 50);
+        } else {
+            _leverTransform.rotation = Quaternion.Euler(0, 0, -50);
+        }
     }
 }
