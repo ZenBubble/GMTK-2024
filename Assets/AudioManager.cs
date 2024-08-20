@@ -15,10 +15,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip potionCollect;
     public AudioClip chameleonDamage;
     public AudioClip chameleonSlurp;
-    public AudioClip chameleonSwing;
     public AudioClip chameleonDeath;
     public AudioClip mainMusic;
-    public AudioClip desertMusic;
     public AudioClip pressurePlate;
     public AudioClip lever; 
 
