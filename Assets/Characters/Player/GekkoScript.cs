@@ -16,8 +16,6 @@ namespace Characters.Player
 		private Boolean isFacingRight;
 		[SerializeField] private ContactFilter2D contactFilter;
 
-		private bool _isGameOver = false;
-
 
 		//Jump
 		private Vector2 _moveInput;
@@ -78,15 +76,6 @@ namespace Characters.Player
 				anim.SetBool("isAirborne", true);
 			} else {
 				anim.SetBool("isAirborne", false);
-			}
-			#endregion
-
-			#region Player check for out-of-bounds
-
-			if (gameObject.transform.localPosition.y <= -50 && !_isGameOver)
-			{
-				GameManager.Instance.ReloadLevel();
-				_isGameOver = true;
 			}
 			#endregion
 		}
