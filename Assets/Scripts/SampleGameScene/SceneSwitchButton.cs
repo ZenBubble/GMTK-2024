@@ -17,15 +17,7 @@ public class SceneSwitchButton : MonoBehaviour
         GetComponent<Button>().onClick.AddListener(onButtonClick);
     }
 
-    LevelLoseSound levelLoseSound;
-
-    private void Awake()
-    {
-        levelLoseSound = GameObject.FindGameObjectWithTag("Sound").GetComponent<LevelLoseSound>();
-    }
-
     void onButtonClick() {
-        levelLoseSound.PlaySFX(levelLoseSound.button);
         Debug.Log(levelIndex);
         // This is an example of switch level to levelIndex.
         GameManager.Instance.SwitchLevel(levelIndex);
