@@ -12,39 +12,49 @@ public class PlayerLife : MonoBehaviour
 {
     // Start is called before the first frame update
     //[SerializeField] private Image[] hearts;
-    public Rigidbody2D rb;
-    private Vector3 screenBounds;
-    public Boolean isDead;
-    public GameObject player;
     //public float maxHealth = 100;
     //public float currentHealth;
-    public float timer;
-    public float deathScreenTime = 100;
+    //public float timer;
+    //public float deathScreenTime = 100;
+
+    private RestartScript restartScript;
+    [SerializeField] float maxX = 200;
+    [SerializeField] float maxY = 200;
+    [SerializeField] float minX = 200;
+    [SerializeField] float minY = -200;
+
 
     void Start()
     {
+        restartScript = GetComponent<RestartScript>();
         //currentHealth = maxHealth;
-        isDead = false;
-        rb = GetComponent<Rigidbody2D>();
         // screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
-    // checks if out of bounds TODO: implement
-    // void Update()
-    // {
-    //     if(transform.position.x < screenBounds.x * -4 || transform.position.x > screenBounds.x * 4){
-    //         //RestartLevel();
-    //     }
-    //     else if(transform.position.y < screenBounds.y * -4)
-    //     {
-    //         //RestartLevel();
-    //     }        
-    // }
+     void Update()
+    {
+        if (transform.position.x < minX || transform.position.x > maxX ||
+            transform.position.y < minY || transform.position.y > maxY)
+        {
+            playerDie();
+        }
+    }
 
     // called by other functions to deal damage. for now sets isDead to true no matter what
     public void TakeDamage(float damageAmount) 
     {
-        isDead = true;
+        playerDie();
+    }
+
+    private void playerDie()
+    {
+        restartScript.RestartScene();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(new Vector3((minX + maxX) / 2f, (minY + maxY) / 2f, 0), new Vector3(maxX - minX, maxY - minY, 0));
     }
 
     // // updates the visual hearts in hearts

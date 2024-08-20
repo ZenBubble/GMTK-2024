@@ -9,17 +9,16 @@ using UnityEngine.UI;
 public class SceneSwitchButton : MonoBehaviour
 {
 
-    public Button thisButton;
-    public int levelIndex;
+    [SerializeField] private int levelIndex;
 
     // Start is called before the first frame update
     void Start()
     {
-        thisButton.onClick.AddListener(onButtonClick);
+        GetComponent<Button>().onClick.AddListener(onButtonClick);
     }
 
     void onButtonClick() {
-        Debug.Log("Button is Clicked");
+        Debug.Log(levelIndex);
         // This is an example of switch level to levelIndex.
         GameManager.Instance.SwitchLevel(levelIndex);
         // This is an example of update game state to "onGame".

@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
     /// <param name="index">scene index from the building view.</param>
     public void SwitchLevel(int index)
     {
+        _level = (CurrentLevel)index;
         // create the cutscene object
         StartCoroutine(LoadScene(index));
     }
