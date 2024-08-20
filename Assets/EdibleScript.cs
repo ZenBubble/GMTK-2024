@@ -49,6 +49,11 @@ public class EdibleScript : MonoBehaviour
     protected virtual void EatAction()
     {
         // do nothing
+        GameObject mouth = _player.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject;
+        if (GameObject.ReferenceEquals(mouth.GetComponent<GrapplingGun>().getConnectedObject(), gameObject))
+        {
+            mouth.GetComponent<GrapplingGun>().disableGrapple();
+        }
         Destroy(gameObject);
     }
 }
