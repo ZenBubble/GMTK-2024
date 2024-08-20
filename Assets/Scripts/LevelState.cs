@@ -8,17 +8,16 @@ public enum CurrentLevel
     Tutorial = 2,
     CutScene1 = 3,
     One = 4,
-    CutScene2 = 5, 
-    Two = 6,
-    CutScene3 = 7,
-    Three = 8,
+    CutScene3 = 5,
+    Three = 6,
+    FinalScene = 7
 }
 
 public static class CurrentLevelMethods
 {
     public static CurrentLevel NextLevel(this CurrentLevel level) {
         int index = level.ToIndex();
-        if (index >= 0 && index <= 7) {
+        if (index >= 0 && index <= 6) {
             return (CurrentLevel) (index + 1);
         } else {
             throw new ArgumentOutOfRangeException("level", level, null);
@@ -31,10 +30,9 @@ public static class CurrentLevelMethods
         CurrentLevel.Tutorial => 2,
         CurrentLevel.CutScene1 => 3,
         CurrentLevel.One => 4,
-        CurrentLevel.CutScene2 => 5,
-        CurrentLevel.Two => 6,
-        CurrentLevel.CutScene3 => 7,
-        CurrentLevel.Three => 8,
+        CurrentLevel.CutScene3 => 5,
+        CurrentLevel.Three => 6,
+        CurrentLevel.FinalScene => 7,
         _ => throw new ArgumentOutOfRangeException("level", level, null)
     };
 }
