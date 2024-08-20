@@ -11,7 +11,7 @@ public class HandleScript : MonoBehaviour
 {
     // currently selected object
     private GameObject selected;
-    private Vector3 selectedSize;
+    private Vector2 selectedSize;
     // location of the handle. (-1, -1) is bottom left, (1, 1) is top right.
     [SerializeField] private int handlePosX;
     [SerializeField] private int handlePosY;
@@ -61,29 +61,30 @@ public class HandleScript : MonoBehaviour
     public void drag(Vector3 mousePos, Vector3 offset)
     {
         // update the stored size of the selected object
-        selectedSize = selected.GetComponent<SpriteRenderer>().bounds.size;
+        selectedSize = selected.GetComponent<SpriteRenderer>().size;
 
         // calculate how much the handle needs to be dragged
         float xPixelShift = mousePos.x - transform.position.x + offset.x;
         float yPixelShift = mousePos.y - transform.position.y + offset.y;
 
+
         // check if dragging the handle would bring the object below the minimum size. If so, set the image to the minimum size
-        if (selectedSize.x + handlePosX * xPixelShift < 0.2)
+        if (selectedSize.x * 0.06 + handlePosX * xPixelShift < 0.2)
         {
-            xPixelShift = -1 * handlePosX * (selectedSize.x - 0.2f);
+            xPixelShift = -1 * handlePosX * (selectedSize.x * 0.06f - 0.2f);
         } 
         else if (transform.position.x + xPixelShift > maxX && isBoundingBoxEnabled())
         {
             xPixelShift = maxX - transform.position.x;
         }
-        else if (transform.position.x + xPixelShift < minX && isBoundingBoxEnabled())
+        else if (transform.position.x + xPixelShift / 0.06 < minX && isBoundingBoxEnabled())
         {
             xPixelShift = -1 * (transform.position.x - minX);
         }
 
-        if (selectedSize.y + handlePosY * yPixelShift < 0.2)
+        if (selectedSize.y * 0.06 + handlePosY * yPixelShift < 0.2)
         {
-            yPixelShift = -1 * handlePosY * (selectedSize.y - 0.2f);
+            yPixelShift = -1 * handlePosY * (selectedSize.y * 0.06f - 0.2f);
         }
         else if (transform.position.y + yPixelShift > maxY && isBoundingBoxEnabled())
         {
@@ -106,21 +107,22 @@ public class HandleScript : MonoBehaviour
     /// <param name="yPixelShift"></param>
     private void resizeSelected(float xPixelShift, float yPixelShift)
     {
-        // original dimensions of the object. used to calculate how much the scale needs to be adjusted
-        float originalWidth = selectedSize.x / selected.transform.localScale.x;
-        float originalHeight = selectedSize.y / selected.transform.localScale.y;
+        //// original dimensions of the object. used to calculate how much the scale needs to be adjusted
+        //float originalWidth = selectedSize.x / selected.transform.localScale.x;
+        //float originalHeight = selectedSize.y / selected.transform.localScale.y;
 
-        // new scale of the object
-        float newScaleX = selected.transform.localScale.x + handlePosX * xPixelShift / originalWidth;
-        float newScaleY = selected.transform.localScale.y + handlePosY * yPixelShift / originalHeight;
+        //// new scale of the object
+        //float newScaleX = selected.transform.localScale.x + handlePosX * xPixelShift / originalWidth;
+        //float newScaleY = selected.transform.localScale.y + handlePosY * yPixelShift / originalHeight;
 
         // new location of the object. keeps the opposite corner of the image from moving. the center of the object moves
         // exactly half as much as the corner that we are dragging
         float newPosX = selected.transform.position.x + xPixelShift / 2f;
         float newPosY = selected.transform.position.y + yPixelShift / 2f;
 
+        selected.GetComponent<SpriteRenderer>().size += new Vector2(xPixelShift * handlePosX, yPixelShift * handlePosY) / 0.06f;
         // apply the new scale and position to the object
-        selected.transform.localScale = new Vector3(newScaleX, newScaleY, selected.transform.localScale.z);
+        //selected.transform.localScale = new Vector3(newScaleX, newScaleY, selected.transform.localScale.z);
         selected.transform.position = new Vector3(newPosX, newPosY, selected.transform.position.z);
     }
 
