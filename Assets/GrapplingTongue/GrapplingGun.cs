@@ -59,6 +59,13 @@ public class GrapplingGun : MonoBehaviour
     [SerializeField] private float timeToDisableRope = 0.5f;
     private float disableTimer = 0f;
 
+    AudioManager audioManager;
+
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+    }
+
     private void Start()
     {
         grappleRope.enabled = false;
@@ -73,6 +80,7 @@ public class GrapplingGun : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             SetGrapplePoint();
+            audioManager.PlaySFX(audioManager.chameleonSlurp);
         }
         else if (Input.GetKey(KeyCode.Mouse1))
         {
