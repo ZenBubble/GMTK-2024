@@ -19,6 +19,8 @@ public class AudioManager : MonoBehaviour
     public AudioClip chameleonDeath;
     public AudioClip mainMusic;
     public AudioClip desertMusic;
+    public AudioClip pressurePlate;
+    public AudioClip lever; 
 
     [HideInInspector]
     private Boolean isRunning = false;
