@@ -1,3 +1,1 @@
-Unity project for GMTK 2024 game jam submission
-Test for collaborators
-Test agaion
+Unity project for GMTK 2024 game jam submission. See main for more details.
